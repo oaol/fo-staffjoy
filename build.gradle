@@ -1,0 +1,14 @@
+description = 'fo-staffjoy'
+
+subprojects {
+    apply plugin: 'java'
+    repositories {
+       mavenCentral()
+    }
+    dependencies {
+    }
+    version = '1.0.0'
+    jar {
+        manifest.attributes provider: 'gradle'
+    }
+}
