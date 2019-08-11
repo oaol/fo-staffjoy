@@ -1,4 +1,4 @@
-description = 'account-svc'
+description = 'Account API/DTO for sharing between Client/Server'
 
 dependencies {
     compile project(':common-lib')

@@ -1,0 +1,7 @@
+description = 'Account API/DTO for sharing between Client/Server'
+
+bootJar.enabled = false
+
+dependencies {
+    compile project(':common-lib')
+}

@@ -1,7 +1,3 @@
 description = 'common-lib'
 
-jar {
-        manifest {
-            attributes "Main-Class": "A"
-        }
-}
+ bootJar.enabled = false

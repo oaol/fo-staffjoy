@@ -1,0 +1,6 @@
+description = 'email service'
+
+dependencies {
+    compile project(':common-lib')
+    compile project(':email-api')
+}

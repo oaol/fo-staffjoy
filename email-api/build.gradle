@@ -1,0 +1,7 @@
+description = 'email api'
+
+bootJar.enabled = false
+
+dependencies {
+    compile project(':common-lib')
+}

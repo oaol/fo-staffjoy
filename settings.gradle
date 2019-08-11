@@ -1,1 +1,6 @@
-include 'account-svc', 'common-lib'
+rootProject.name = 'fo-staffjoy'
+
+include 'common-lib'
+include 'account-svc', 'account-api'
+include 'email-svc', 'email-api'
+include 'feign-test'
