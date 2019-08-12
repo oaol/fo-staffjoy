@@ -1,6 +1,7 @@
 package fo.staffjoy.feign.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -16,7 +17,8 @@ public class TestController {
     private AccountClient accountClient;
     
     @GetMapping("test")
-    public TestDto hello(String name) {
-        return accountClient.test(name);
+    public ResponseEntity<TestDto> hello(String name) {
+        ResponseEntity<TestDto> test = accountClient.test(name);
+        return test;
     }
 }

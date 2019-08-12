@@ -1,5 +1,6 @@
 package fo.staffjoy.account.controller;
 
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -12,9 +13,9 @@ import fo.staffjoy.account.dto.TestDto;
 public class TestController {
 
     @GetMapping
-    public TestDto test(@RequestParam String name) {
+    public ResponseEntity<TestDto> test(@RequestParam String name) {
         TestDto testDto = new  TestDto();
         testDto.setHello(name);
-        return testDto;
+        return ResponseEntity.ok(testDto);
     }
 }
