@@ -1,11 +1,11 @@
-package fo.staffjoy.mail;
+package fo.staffjoy.template;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class MailApplication {
+public class TemplateApplication {
     public static void main(String[] args) {
-        SpringApplication.run(MailApplication.class, args);
+        SpringApplication.run(TemplateApplication.class, args);
     }
 }

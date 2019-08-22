@@ -3,4 +3,7 @@ description = 'email service'
 dependencies {
     compile project(':common-lib')
     compile project(':mail-api')
+    // aliyun sdk
+    implementation 'com.aliyun:aliyun-java-sdk-core:3.0.0'
+    implementation 'com.aliyun:aliyun-java-sdk-dm:3.1.0'
 }

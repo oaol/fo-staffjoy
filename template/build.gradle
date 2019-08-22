@@ -1,0 +1,5 @@
+description = 'template'
+
+dependencies {
+    compile project(':common-lib')
+}

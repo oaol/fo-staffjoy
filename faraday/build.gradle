@@ -1,0 +1,7 @@
+description = 'Proxy or Gateway, Aka. Central Traffic Entry Point for Staffjoy MicroServices and Apps'
+
+dependencies {
+    compile project(':common-lib')
+    implementation 'commons-io:commons-io:2.6'
+    implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
+}

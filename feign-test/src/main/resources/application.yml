@@ -21,7 +21,7 @@ staffjoy:
     sentry-dsn: ${SENTRY_DSN}
     deploy-env: ${DEPLOY:V2}
   signing-secret: ${SIGNING_SECRET}
-  email-service-endpoint: ${EMAIL_SERVICE_ENDPOINT:http://email-service:8080}
+  email-service-endpoint: ${EMAIL_SERVICE_ENDPOINT:http://localhost:8083}
   company-service-endpoint: ${COMPANY_SERVICE_ENDPOINT:http://company-service:8080}
   bot-service-endpoint: ${BOT_SERVICE_ENDPOINT:http://bot-service:8080}
   intercom-access-token: ${INTERCOM_ACCESS_TOKEN}
