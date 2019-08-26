@@ -14,8 +14,8 @@ import fo.staffjoy.faraday.view.ErrorPage;
 import fo.staffjoy.faraday.view.ErrorPageFactory;
 
 @Controller
-public class GlobalErrorController implements ErrorController{
-    
+public class GlobalErrorController implements ErrorController {
+
     @Autowired
     ErrorPageFactory errorPageFactory;
 
@@ -23,7 +23,7 @@ public class GlobalErrorController implements ErrorController{
     public String handlerError(HttpServletRequest request, Model model) {
         Object statusCode = request.getAttribute(RequestDispatcher.ERROR_STATUS_CODE);
         ErrorPage errorPage = null;
-        if (HttpStatus.FORBIDDEN.value() == (int)statusCode) {
+        if (HttpStatus.FORBIDDEN.value() == (int) statusCode) {
             errorPage = errorPageFactory.buildForbiddenErrorPage();
         } else {
             errorPage = errorPageFactory.buildInternalServerErrorPage();
@@ -31,6 +31,7 @@ public class GlobalErrorController implements ErrorController{
         model.addAttribute("page", errorPage);
         return "error";
     }
+
     @Override
     public String getErrorPath() {
         return "/error";

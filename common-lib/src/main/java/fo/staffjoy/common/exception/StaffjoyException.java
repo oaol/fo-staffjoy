@@ -18,10 +18,16 @@ public class StaffjoyException extends RuntimeException {
     }
 
     /**
-     * 用异常处理流程因为需要记录栈针会消耗性能，屏蔽战阵
+     * for better performance
+     *
+     * @return Throwable
      */
     @Override
     public Throwable fillInStackTrace() {
         return this;
+    }
+
+    public Throwable doFillInStackTrace() {
+        return super.fillInStackTrace();
     }
 }

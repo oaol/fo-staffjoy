@@ -54,6 +54,9 @@ subprojects {
         implementation 'org.springframework.cloud:spring-cloud-starter-openfeign'
         // use in-memory db for unit testing
         testImplementation 'com.h2database:h2'
+        implementation 'org.apache.commons:commons-lang3:3.4'
+        implementation 'com.auth0:java-jwt:3.8.2'
+        implementation 'org.springframework.boot:spring-boot-starter-actuator'
     }
 
     dependencyManagement {

@@ -5,12 +5,7 @@ import lombok.Getter;
 
 import javax.servlet.http.HttpServletResponse;
 
-/**
- * Result Code Enum
- * 
- * @author bryce
- * @Date Aug 11, 2019
- */
+@Deprecated
 @Getter
 @AllArgsConstructor
 public enum ResultCodeEnum {

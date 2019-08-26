@@ -4,4 +4,5 @@ dependencies {
     compile project(':common-lib')
     implementation 'commons-io:commons-io:2.6'
     implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
+    implementation 'org.apache.httpcomponents:httpclient:4.5.9'
 }
