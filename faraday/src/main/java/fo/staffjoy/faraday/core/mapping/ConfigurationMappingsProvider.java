@@ -7,9 +7,9 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.boot.autoconfigure.web.ServerProperties;
 
-import fo.staffjoy.faraday.config.FaradayProperties;
-import fo.staffjoy.faraday.config.MappingProperties;
 import fo.staffjoy.faraday.core.http.HttpClientProvider;
+import fo.staffjoy.faraday.properties.FaradayProperties;
+import fo.staffjoy.faraday.properties.MappingProperties;
 
 public class ConfigurationMappingsProvider extends MappingsProvider {
 

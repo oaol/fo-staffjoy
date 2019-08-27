@@ -12,9 +12,9 @@ import org.springframework.boot.autoconfigure.web.ServerProperties;
 import fo.staffjoy.common.env.EnvConfig;
 import fo.staffjoy.common.services.Service;
 import fo.staffjoy.common.services.ServiceDirectory;
-import fo.staffjoy.faraday.config.FaradayProperties;
-import fo.staffjoy.faraday.config.MappingProperties;
 import fo.staffjoy.faraday.core.http.HttpClientProvider;
+import fo.staffjoy.faraday.properties.FaradayProperties;
+import fo.staffjoy.faraday.properties.MappingProperties;
 
 public class ProgrammaticMappingsProvider extends MappingsProvider {
     protected final EnvConfig envConfig;

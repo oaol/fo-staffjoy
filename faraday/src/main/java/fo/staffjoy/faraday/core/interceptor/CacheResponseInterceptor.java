@@ -4,8 +4,8 @@ import java.util.List;
 
 import org.springframework.http.HttpHeaders;
 
-import fo.staffjoy.faraday.config.MappingProperties;
 import fo.staffjoy.faraday.core.http.ResponseData;
+import fo.staffjoy.faraday.properties.MappingProperties;
 
 public class CacheResponseInterceptor implements PostForwardResponseInterceptor {
     @Override

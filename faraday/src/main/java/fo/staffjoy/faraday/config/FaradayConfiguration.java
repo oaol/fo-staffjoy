@@ -34,6 +34,8 @@ import fo.staffjoy.faraday.core.mapping.ProgrammaticMappingsProvider;
 import fo.staffjoy.faraday.core.trace.LoggingTraceInterceptor;
 import fo.staffjoy.faraday.core.trace.ProxyingTraceInterceptor;
 import fo.staffjoy.faraday.core.trace.TraceInterceptor;
+import fo.staffjoy.faraday.properties.FaradayProperties;
+import fo.staffjoy.faraday.properties.StaffjoyPropreties;
 import fo.staffjoy.faraday.view.AssetLoader;
 import io.micrometer.core.instrument.MeterRegistry;
 

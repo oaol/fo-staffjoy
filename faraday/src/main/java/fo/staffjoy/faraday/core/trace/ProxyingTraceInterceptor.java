@@ -6,7 +6,7 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.HttpStatus;
 
-import fo.staffjoy.faraday.config.FaradayProperties;
+import fo.staffjoy.faraday.properties.FaradayProperties;
 
 public class ProxyingTraceInterceptor {
 

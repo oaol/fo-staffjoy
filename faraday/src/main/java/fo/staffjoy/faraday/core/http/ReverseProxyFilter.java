@@ -19,11 +19,11 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.filter.OncePerRequestFilter;
 
 import fo.staffjoy.common.exception.StaffjoyException;
-import fo.staffjoy.faraday.config.FaradayProperties;
-import fo.staffjoy.faraday.config.MappingProperties;
 import fo.staffjoy.faraday.core.interceptor.PreForwardRequestInterceptor;
 import fo.staffjoy.faraday.core.mapping.MappingsProvider;
 import fo.staffjoy.faraday.core.trace.ProxyingTraceInterceptor;
+import fo.staffjoy.faraday.properties.FaradayProperties;
+import fo.staffjoy.faraday.properties.MappingProperties;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j

@@ -19,12 +19,12 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.client.HttpStatusCodeException;
 
 import fo.staffjoy.common.exception.StaffjoyException;
-import fo.staffjoy.faraday.config.FaradayProperties;
-import fo.staffjoy.faraday.config.MappingProperties;
 import fo.staffjoy.faraday.core.balancer.LoadBalancer;
 import fo.staffjoy.faraday.core.interceptor.PostForwardResponseInterceptor;
 import fo.staffjoy.faraday.core.mapping.MappingsProvider;
 import fo.staffjoy.faraday.core.trace.ProxyingTraceInterceptor;
+import fo.staffjoy.faraday.properties.FaradayProperties;
+import fo.staffjoy.faraday.properties.MappingProperties;
 import io.micrometer.core.instrument.MeterRegistry;
 import lombok.extern.slf4j.Slf4j;
 

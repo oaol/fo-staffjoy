@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import fo.staffjoy.common.exception.StaffjoyException;
-import fo.staffjoy.faraday.config.MappingProperties;
+import fo.staffjoy.faraday.properties.MappingProperties;
 
 public class MappingsValidator {
 

@@ -12,7 +12,7 @@ import org.apache.http.impl.client.HttpClientBuilder;
 import org.springframework.http.client.HttpComponentsClientHttpRequestFactory;
 import org.springframework.web.client.RestTemplate;
 
-import fo.staffjoy.faraday.config.MappingProperties;
+import fo.staffjoy.faraday.properties.MappingProperties;
 
 public class HttpClientProvider {
     protected Map<String, RestTemplate> httpClients = new HashMap<>();
