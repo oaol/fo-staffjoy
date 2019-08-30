@@ -2,5 +2,10 @@ description = 'account-svc'
 
 dependencies {
     compile project(':common-lib')
+    compile project(':mail-api')
     compile project(':account-api')
+    implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+    implementation 'mysql:mysql-connector-java'
+    // for test
+    //implementation 'com.h2database:com.h2database'
 }

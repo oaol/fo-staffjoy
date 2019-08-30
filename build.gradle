@@ -46,8 +46,8 @@ subprojects {
 
         implementation 'org.springframework.boot:spring-boot-starter'
         compileOnly 'org.projectlombok:lombok'
-        compile 'org.springframework.boot:spring-boot-devtools'
         annotationProcessor 'org.projectlombok:lombok'
+        compile 'org.springframework.boot:spring-boot-devtools'
         testImplementation 'org.springframework.boot:spring-boot-starter-test'
         implementation 'org.springframework.boot:spring-boot-starter-log4j2'
         implementation 'org.springframework.boot:spring-boot-starter-web'
@@ -57,6 +57,7 @@ subprojects {
         implementation 'org.apache.commons:commons-lang3:3.4'
         implementation 'com.auth0:java-jwt:3.8.2'
         implementation 'org.springframework.boot:spring-boot-starter-actuator'
+        implementation 'org.modelmapper:modelmapper:2.3.3'
     }
 
     dependencyManagement {

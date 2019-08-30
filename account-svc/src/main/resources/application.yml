@@ -15,6 +15,10 @@ spring:
   jpa:
     hibernate:
       ddl-auto: validate
+      
+feign: 
+  httpclient: 
+    enabled: true
 
 staffjoy:
   common:

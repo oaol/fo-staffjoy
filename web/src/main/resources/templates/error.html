@@ -3,7 +3,7 @@
       xmlns:th="http://www.thymeleaf.org">
 <meta charset=utf-8>
 <meta name=viewport content="initial-scale=1, minimum-scale=1, width=device-width">
-<title th:text="${page.title}" />
+<title th:text="${page.title}"></title>
 <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400" rel="stylesheet">
 <style>
     *{margin:0;padding:0}
@@ -43,11 +43,10 @@
         margin-top: 32px;
     }
     #container {
-        padding: 20% 10%;
         max-width: 80%;
-        width: 380;
+        width: 380px;
         text-align: center;
-        margin: 0 auto;
+        margin: 100px auto;
     }
     img {
         width: 340px;
@@ -58,9 +57,9 @@
 
 <div id="container">
     <img th:src="|data:image/png;base64,${page.imageBase64}|" alt="Spilled Coffee" />
-    <h1 th:text="${page.title}" />
-    <p th:text="${page.explanation}" />
-    <p><a th:href="${page.linkHref}" th:text="${page.linkText}" /></p>
+    <h1 th:text="${page.title}"></h1>
+    <p th:text="${page.explanation}"> </p>
+    <p><a th:href="${page.linkHref}" th:text="${page.linkText}"></a></p>
 </div>
 
 <th:block th:if="${page.sentryErrorId != null and page.sentryPublicDsn != null}">

@@ -8,19 +8,22 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import fo.staffjoy.account.client.AccountClient;
+import fo.staffjoy.account.dto.AccountDto;
+import fo.staffjoy.account.dto.VerifyPasswordRequest;
 import fo.staffjoy.common.auth.AuthConstant;
 import fo.staffjoy.common.auth.AuthContext;
 import fo.staffjoy.common.auth.Sessions;
 import fo.staffjoy.common.env.EnvConfig;
 import fo.staffjoy.common.services.Service;
 import fo.staffjoy.common.services.ServiceDirectory;
-import fo.staffjoy.web.entity.AccountDto;
 import fo.staffjoy.web.properties.AppProps;
 import fo.staffjoy.web.service.HelperService;
 import fo.staffjoy.web.view.Constant;
@@ -42,8 +45,8 @@ public class LoginController {
     @Autowired
     private HelperService helperService;
 
-//    @Autowired
-//    private AccountClient accountClient;
+    @Autowired
+    private AccountClient accountClient;
 
     @RequestMapping(value = "/login")
     public String login(@RequestParam(value="return_to", required = false) String returnTo, // POST and GET are in the same handler - reset
@@ -66,24 +69,26 @@ public class LoginController {
 
         if (HelperService.isPost(request)) {
 
-            AccountDto account = AccountDto.builder().id("admin").support(false).build();
-//            GenericAccountResponse genericAccountResponse = null;
-//            try {
-//                VerifyPasswordRequest verifyPasswordRequest = VerifyPasswordRequest.builder()
-//                        .email(email)
-//                        .password(password)
-//                        .build();
-//                genericAccountResponse = accountClient.verifyPassword(AuthConstant.AUTHORIZATION_WWW_SERVICE, verifyPasswordRequest);
-//            } catch (Exception ex) {
+            AccountDto account = null;
+            ResponseEntity<AccountDto> genericAccountResponse = null;
+            try {
+                VerifyPasswordRequest verifyPasswordRequest = VerifyPasswordRequest.builder()
+                        .email(email)
+                        .password(password)
+                        .build();
+                genericAccountResponse = accountClient.verifyPassword(AuthConstant.AUTHORIZATION_WWW_SERVICE, verifyPasswordRequest);
+            } catch (Exception ex) {
+                // TODO
 //                helperService.logException(logger, ex, "fail to verify user password");
-//            }
-//            if (genericAccountResponse != null) {
-//                if (!genericAccountResponse.isSuccess()) {
+            }
+            if (genericAccountResponse != null) {
+                if (genericAccountResponse.getStatusCode().isError()) {
+                    // TODO
 //                    helperService.logError(logger, genericAccountResponse.getMessage());
-//                } else {
-//                    account = genericAccountResponse.getAccount();
-//                }
-//            }
+                } else {
+                    account = genericAccountResponse.getBody();
+                }
+            }
 
             if (account != null) { // login success
                 // set cookie
