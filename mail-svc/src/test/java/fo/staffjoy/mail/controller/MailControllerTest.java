@@ -21,10 +21,10 @@ import com.aliyuncs.dm.model.v20151123.SingleSendMailRequest;
 import com.aliyuncs.dm.model.v20151123.SingleSendMailResponse;
 import com.aliyuncs.exceptions.ClientException;
 
-import fo.staffjoy.mail.MailConstant;
-import fo.staffjoy.mail.client.MailClient;
-import fo.staffjoy.mail.dto.EmailRequest;
 import lombok.extern.slf4j.Slf4j;
+import tech.staffjoy.mail.MailConstant;
+import tech.staffjoy.mail.client.MailClient;
+import tech.staffjoy.mail.dto.EmailRequest;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.DEFINED_PORT)

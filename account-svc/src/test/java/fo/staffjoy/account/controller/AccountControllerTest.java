@@ -8,7 +8,7 @@ import org.springframework.context.annotation.Import;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import fo.staffjoy.account.TestConfig;
-import fo.staffjoy.account.client.AccountClient;
+import tech.staffjoy.account.client.AccountClient;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.DEFINED_PORT)
