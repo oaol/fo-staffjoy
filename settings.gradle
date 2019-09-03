@@ -2,7 +2,7 @@ rootProject.name = 'fo-staffjoy'
 
 include 'common-lib'
 include 'account-svc', 'account-api'
-include 'company-api'
+include 'company-svc', 'company-api'
 include 'mail-svc', 'mail-api'
 include 'feign-test'
 include 'faraday'

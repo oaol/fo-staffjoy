@@ -63,7 +63,7 @@ public class LoginController {
 
         // if logged in - go away
         if (!StringUtils.isEmpty(AuthContext.getAuthz()) && !AuthConstant.AUTHORIZATION_ANONYMOUS_WEB.equals(AuthContext.getAuthz())) {
-            String url = HelperService.buildUrl("http", "myaccount." + envConfig.getExternalApex());
+            String url = helperService.buildUrl("http", "myaccount." + envConfig.getExternalApex());
             return "redirect:" + url;
         }
 
@@ -107,14 +107,14 @@ public class LoginController {
                 }
 
                 if (StringUtils.isEmpty(returnTo)) {
-                    returnTo = HelperService.buildUrl(scheme, "app." + envConfig.getExternalApex());
+                    returnTo = helperService.buildUrl(scheme, "app." + envConfig.getExternalApex());
                 } else {
                     if (!returnTo.startsWith("http")) {
                         returnTo = "http://" + returnTo;
                     }
                     // sanitize
                     if (!isValidSub(returnTo)) {
-                        returnTo = HelperService.buildUrl(scheme, "myaccount." + envConfig.getExternalApex());
+                        returnTo = helperService.buildUrl(scheme, "myaccount." + envConfig.getExternalApex());
                     }
                 }
 

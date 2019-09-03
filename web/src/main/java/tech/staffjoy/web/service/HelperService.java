@@ -6,10 +6,16 @@ import java.net.URISyntaxException;
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
+import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 
+import tech.staffjoy.account.dto.AccountDto;
 import tech.staffjoy.common.exception.ServiceException;
+import tech.staffjoy.company.dto.CompanyDto;
 import tech.staffjoy.mail.client.MailClient;
+import tech.staffjoy.mail.dto.EmailRequest;
+import tech.staffjoy.web.config.AppConfig;
 
 @Service
 public class HelperService {
@@ -62,37 +68,37 @@ public class HelperService {
 //        accountClient.syncUser(request);
 //    }
 
-//    @Async(AppConfig.ASYNC_EXECUTOR_NAME)
-//    public void sendEmailAsync(AccountDto a, CompanyDto c) {
-//        EmailRequest emailRequest = EmailRequest.builder()
-//                .to("sales@staffjoy.xyz")
-//                .name("")
-//                .subject(String.format("%s from %s just joined Staffjoy", a.getName(), c.getName()))
-//                .htmlBody(String.format("Name: %s<br>Phone: %s<br>Email: %s<br>Company: %s<br>App: https://app.staffjoy.com/#/companies/%s/employees/",
-//                        a.getName(),
-//                        a.getPhoneNumber(),
-//                        a.getEmail(),
-//                        c.getName(),
-//                        c.getId()))
-//                .build();
-//
-//        BaseResponse baseResponse = null;
-//        try {
-//            baseResponse = mailClient.send(emailRequest);
-//        } catch (Exception ex) {
-//            String errMsg = "Unable to send email";
-//            logException(logger, ex, errMsg);
-//        }
-//        if (!baseResponse.isSuccess()) {
-//            logError(logger, baseResponse.getMessage());
-//        }
-//    }
+    @Async(AppConfig.ASYNC_EXECUTOR_NAME)
+    public void sendEmailAsync(AccountDto a, CompanyDto c) {
+        EmailRequest emailRequest = EmailRequest.builder()
+                .to("sales@staffjoy.xyz")
+                .name("")
+                .subject(String.format("%s from %s just joined Staffjoy", a.getName(), c.getName()))
+                .htmlBody(String.format("Name: %s<br>Phone: %s<br>Email: %s<br>Company: %s<br>App: https://app.staffjoy.com/#/companies/%s/employees/",
+                        a.getName(),
+                        a.getPhoneNumber(),
+                        a.getEmail(),
+                        c.getName(),
+                        c.getId()))
+                .build();
 
-    public static String buildUrl(String scheme, String host) {
+        ResponseEntity<String> sendResponse = null;
+        try {
+            sendResponse = mailClient.send(emailRequest);
+        } catch (Exception ex) {
+            String errMsg = "Unable to send email";
+//            logException(logger, ex, errMsg);
+        }
+        if (sendResponse.getStatusCode().isError()) {
+//            logError(logger, baseResponse.getMessage());
+        }
+    }
+
+    public String buildUrl(String scheme, String host) {
         return buildUrl(scheme, host, null);
     }
 
-    public static String buildUrl(String scheme, String host, String path) {
+    public String buildUrl(String scheme, String host, String path) {
         try {
             URI uri = new URI(scheme, host, path, null);
             return uri.toString();
