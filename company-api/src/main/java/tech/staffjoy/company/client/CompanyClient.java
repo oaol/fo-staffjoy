@@ -47,7 +47,7 @@ public interface CompanyClient {
     ResponseEntity<CompanyDto> createCompany(@RequestHeader(AuthConstant.AUTHORIZATION_HEADER) String authz, @RequestBody @Validated({Group2.class}) CompanyDto companyDto);
 
     @GetMapping(path = "/list")
-    ResponseEntity<CompanyList> listCompanies(@RequestHeader(AuthConstant.AUTHORIZATION_HEADER) String authz, @RequestParam int offset, @RequestParam int limit);
+    ResponseEntity<CompanyList> listCompanies(@RequestHeader(AuthConstant.AUTHORIZATION_HEADER) String authz, @RequestParam("offset") int offset, @RequestParam("limit") int limit);
 
     @GetMapping
     ResponseEntity<CompanyDto> getCompany(@RequestHeader(AuthConstant.AUTHORIZATION_HEADER) String authz, @RequestParam("companyId") String companyId);
@@ -57,10 +57,10 @@ public interface CompanyClient {
 
     // Admin Apis
     @GetMapping(path = "/admin/list")
-    ResponseEntity<AdminEntries> listAdmins(@RequestHeader(AuthConstant.AUTHORIZATION_HEADER) String authz, @RequestParam String companyId);
+    ResponseEntity<AdminEntries> listAdmins(@RequestHeader(AuthConstant.AUTHORIZATION_HEADER) String authz, @RequestParam("companyId") String companyId);
 
     @GetMapping(path = "/admin")
-    ResponseEntity<DirectoryEntryDto> getAdmin(@RequestHeader(AuthConstant.AUTHORIZATION_HEADER) String authz, @RequestParam String companyId, @RequestParam String userId);
+    ResponseEntity<DirectoryEntryDto> getAdmin(@RequestHeader(AuthConstant.AUTHORIZATION_HEADER) String authz, @RequestParam("companyId") String companyId, @RequestParam("userId") String userId);
 
     // TODO
     @PostMapping(path = "/admin")
@@ -70,36 +70,36 @@ public interface CompanyClient {
     ResponseEntity<String> deleteAdmin(@RequestHeader(AuthConstant.AUTHORIZATION_HEADER) String authz, @RequestBody @Validated DirectoryEntryRequest request);
 
     @GetMapping(path = "/admin/admin-of")
-    ResponseEntity<AdminOfList> getAdminOf(@RequestHeader(AuthConstant.AUTHORIZATION_HEADER) String authz, @RequestParam String userId);
+    ResponseEntity<AdminOfList> getAdminOf(@RequestHeader(AuthConstant.AUTHORIZATION_HEADER) String authz, @RequestParam("userId") String userId);
 
     // Directory Apis
     @PostMapping(path = "/directory")
     ResponseEntity<DirectoryEntryDto> createDirectory(@RequestHeader(AuthConstant.AUTHORIZATION_HEADER) String authz, @RequestBody @Validated NewDirectoryEntry request);
 
     @GetMapping(path = "/directory/list")
-    ResponseEntity<DirectoryList> listDirectories(@RequestHeader(AuthConstant.AUTHORIZATION_HEADER) String authz, @RequestParam String companyId, @RequestParam int offset, @RequestParam int limit);
+    ResponseEntity<DirectoryList> listDirectories(@RequestHeader(AuthConstant.AUTHORIZATION_HEADER) String authz, @RequestParam("companyId") String companyId, @RequestParam("offset") int offset, @RequestParam("limit") int limit);
 
     @GetMapping(path = "/directory")
-    ResponseEntity<DirectoryEntryDto> getDirectoryEntry(@RequestHeader(AuthConstant.AUTHORIZATION_HEADER) String authz, @RequestParam String companyId, @RequestParam String userId);
+    ResponseEntity<DirectoryEntryDto> getDirectoryEntry(@RequestHeader(AuthConstant.AUTHORIZATION_HEADER) String authz, @RequestParam("companyId") String companyId, @RequestParam("userId") String userId);
 
     @PutMapping(path = "/directory")
     ResponseEntity<DirectoryEntryDto> updateDirectoryEntry(@RequestHeader(AuthConstant.AUTHORIZATION_HEADER) String authz, @RequestBody @Validated DirectoryEntryDto request);
 
     @GetMapping(path = "/directory/associations")
-    ResponseEntity<AssociationList> getAssociations(@RequestHeader(AuthConstant.AUTHORIZATION_HEADER) String authz, @RequestParam String companyId, @RequestParam int offset, @RequestParam int limit);
+    ResponseEntity<AssociationList> getAssociations(@RequestHeader(AuthConstant.AUTHORIZATION_HEADER) String authz, @RequestParam("companyId") String companyId, @RequestParam("offset") int offset, @RequestParam("limit") int limit);
 
     // WorkerDto Apis
     @GetMapping(path = "/worker/list")
-    ResponseEntity<WorkerOfList> listWorkers(@RequestHeader(AuthConstant.AUTHORIZATION_HEADER) String authz, @RequestParam String companyId, @RequestParam String teamId);
+    ResponseEntity<WorkerOfList> listWorkers(@RequestHeader(AuthConstant.AUTHORIZATION_HEADER) String authz, @RequestParam("companyId") String companyId, @RequestParam("teamId") String teamId);
 
     @GetMapping(path = "/worker")
-    ResponseEntity<WorkerDto> getWorker(@RequestHeader(AuthConstant.AUTHORIZATION_HEADER) String authz, @RequestParam  String companyId, @RequestParam String teamId, @RequestParam String userId);
+    ResponseEntity<WorkerDto> getWorker(@RequestHeader(AuthConstant.AUTHORIZATION_HEADER) String authz, @RequestParam("companyId")  String companyId, @RequestParam("teamId") String teamId, @RequestParam("userId") String userId);
 
     @DeleteMapping(path = "/worker")
     ResponseEntity<String> deleteWorker(@RequestHeader(AuthConstant.AUTHORIZATION_HEADER) String authz, @RequestBody @Validated WorkerDto workerDto);
 
     @GetMapping(path = "/worker/of")
-    ResponseEntity<WorkerOfList> getWorkerOf(@RequestHeader(AuthConstant.AUTHORIZATION_HEADER) String authz, @RequestParam String userId);
+    ResponseEntity<WorkerOfList> getWorkerOf(@RequestHeader(AuthConstant.AUTHORIZATION_HEADER) String authz, @RequestParam("userId") String userId);
 
     @PostMapping(path = "/worker")
     ResponseEntity<WorkerDto> createWorker(@RequestHeader(AuthConstant.AUTHORIZATION_HEADER) String authz, @RequestBody @Validated WorkerDto workerDto);
@@ -109,26 +109,26 @@ public interface CompanyClient {
     ResponseEntity<TeamDto> createTeam(@RequestHeader(AuthConstant.AUTHORIZATION_HEADER) String authz, @RequestBody @Validated CreateTeamRequest request);
 
     @GetMapping(path = "/team/list")
-    ResponseEntity<TeamList> listTeams(@RequestHeader(AuthConstant.AUTHORIZATION_HEADER) String authz, @RequestParam String companyId);
+    ResponseEntity<TeamList> listTeams(@RequestHeader(AuthConstant.AUTHORIZATION_HEADER) String authz, @RequestParam("companyId") String companyId);
 
     @GetMapping(path = "/team")
-    ResponseEntity<TeamDto> getTeam(@RequestHeader(AuthConstant.AUTHORIZATION_HEADER) String authz, @RequestParam String companyId, @RequestParam String teamId);
+    ResponseEntity<TeamDto> getTeam(@RequestHeader(AuthConstant.AUTHORIZATION_HEADER) String authz, @RequestParam("companyId") String companyId, @RequestParam("teamId") String teamId);
 
     @PutMapping(path = "/team")
     ResponseEntity<TeamDto> updateTeam(@RequestHeader(AuthConstant.AUTHORIZATION_HEADER) String authz, @RequestBody @Validated TeamDto teamDto);
 
     @GetMapping(path = "/team/worker-team-info")
-    ResponseEntity<TeamDto> getWorkerTeamInfo(@RequestHeader(AuthConstant.AUTHORIZATION_HEADER) String authz, @RequestParam(required = false) String companyId, @RequestParam String userId);
+    ResponseEntity<TeamDto> getWorkerTeamInfo(@RequestHeader(AuthConstant.AUTHORIZATION_HEADER) String authz, @RequestParam(required = false, value = "companyId") String companyId, @RequestParam("userId") String userId);
 
     // Job Apis
     @PostMapping(path = "/job")
     ResponseEntity<JobDto> createJob(@RequestHeader(AuthConstant.AUTHORIZATION_HEADER) String authz, @RequestBody @Validated CreateJobRequest request);
 
     @GetMapping(path = "/job/list")
-    ResponseEntity<JobList> listJobs(@RequestHeader(AuthConstant.AUTHORIZATION_HEADER) String authz, @RequestParam String companyId, @RequestParam String teamId);
+    ResponseEntity<JobList> listJobs(@RequestHeader(AuthConstant.AUTHORIZATION_HEADER) String authz, @RequestParam("companyId") String companyId, @RequestParam("teamId") String teamId);
 
     @GetMapping(path = "/job")
-    ResponseEntity<JobDto> getJob(@RequestHeader(AuthConstant.AUTHORIZATION_HEADER) String authz, @RequestParam String jobId, @RequestParam String companyId, @RequestParam String teamId);
+    ResponseEntity<JobDto> getJob(@RequestHeader(AuthConstant.AUTHORIZATION_HEADER) String authz, @RequestParam("jobId") String jobId, @RequestParam("companyId") String companyId, @RequestParam("teamId") String teamId);
 
     @PutMapping(path = "/job")
     ResponseEntity<JobDto> updateJob(@RequestHeader(AuthConstant.AUTHORIZATION_HEADER) String authz, @RequestBody @Validated JobDto jobDto);
@@ -147,11 +147,11 @@ public interface CompanyClient {
     ResponseEntity<ShiftList> bulkPublishShifts(@RequestHeader(AuthConstant.AUTHORIZATION_HEADER) String authz, @RequestBody @Validated BulkPublishShiftsRequest request);
 
     @GetMapping(path = "/shift")
-    ResponseEntity<ShiftDto> getShift(@RequestHeader(AuthConstant.AUTHORIZATION_HEADER) String authz, @RequestParam String shiftId, @RequestParam String teamId, @RequestParam  String companyId);
+    ResponseEntity<ShiftDto> getShift(@RequestHeader(AuthConstant.AUTHORIZATION_HEADER) String authz, @RequestParam("shiftId") String shiftId, @RequestParam("teamId") String teamId, @RequestParam("companyId")  String companyId);
 
     @PutMapping(path = "/shift")
     ResponseEntity<ShiftDto> updateShift(@RequestHeader(AuthConstant.AUTHORIZATION_HEADER) String authz, @RequestBody @Validated ShiftDto shiftDto);
 
     @DeleteMapping(path = "/shift")
-    ResponseEntity<String> deleteShift(@RequestHeader(AuthConstant.AUTHORIZATION_HEADER) String authz, @RequestParam String shiftId, @RequestParam String teamId, @RequestParam String companyId);
+    ResponseEntity<String> deleteShift(@RequestHeader(AuthConstant.AUTHORIZATION_HEADER) String authz, @RequestParam("shiftId") String shiftId, @RequestParam("teamId") String teamId, @RequestParam("companyId") String companyId);
 }
