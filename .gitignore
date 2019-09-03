@@ -29,7 +29,7 @@
 .DS_Store
 
 ### Spring Dev Credentials ###
-config/*.yml
+config/application.yml
 
 ### Docker Test Credentials ###
 .env
