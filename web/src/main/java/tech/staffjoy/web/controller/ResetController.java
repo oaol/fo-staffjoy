@@ -8,6 +8,9 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.github.structlog4j.ILogger;
+import com.github.structlog4j.SLoggerFactory;
+
 import tech.staffjoy.account.client.AccountClient;
 import tech.staffjoy.web.service.HelperService;
 import tech.staffjoy.web.view.Constant;
@@ -18,7 +21,7 @@ public class ResetController {
 
     public static final String PASSWORD_RESET_PATH = "/password-reset";
 
-//    static final ILogger logger = SLoggerFactory.getLogger(ResetController.class);
+    private static final ILogger logger = SLoggerFactory.getLogger(ResetController.class);
 
     @Autowired
     private PageFactory pageFactory;

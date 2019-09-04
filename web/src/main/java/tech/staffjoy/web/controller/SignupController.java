@@ -8,6 +8,9 @@ import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.github.structlog4j.ILogger;
+import com.github.structlog4j.SLoggerFactory;
+
 import tech.staffjoy.account.client.AccountClient;
 import tech.staffjoy.account.dto.AccountDto;
 import tech.staffjoy.account.dto.CreateAccountRequest;
@@ -21,7 +24,7 @@ public class SignupController {
 
     static final String SIGN_UP_REDIRECT_PATH = "redirect:/sign-up";
 
-//    static final ILogger logger = SLoggerFactory.getLogger(LoginController.class);
+    private static final ILogger logger = SLoggerFactory.getLogger(SignupController.class);
 
     @Autowired
     private PageFactory pageFactory;

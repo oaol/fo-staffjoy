@@ -8,12 +8,17 @@ import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.github.structlog4j.ILogger;
+import com.github.structlog4j.SLoggerFactory;
+
 import tech.staffjoy.common.exception.ServiceException;
 import tech.staffjoy.mail.client.MailClient;
+import tech.staffjoy.web.controller.GlobalErrorController;
 
 @Service
 public class HelperService {
 
+    private static final ILogger logger = SLoggerFactory.getLogger(HelperService.class);
 
     static final String METHOD_POST = "POST";
 
@@ -98,7 +103,7 @@ public class HelperService {
             return uri.toString();
         } catch (URISyntaxException ex) {
             String errMsg = "Internal uri parsing exception.";
-//            logger.error(errMsg);
+            logger.error(errMsg);
             throw new ServiceException(errMsg, ex);
         }
     }

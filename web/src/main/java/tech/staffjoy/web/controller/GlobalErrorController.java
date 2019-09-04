@@ -12,6 +12,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.github.structlog4j.ILogger;
+import com.github.structlog4j.SLoggerFactory;
+
 import tech.staffjoy.common.config.StaffjoyProps;
 import tech.staffjoy.common.env.EnvConfig;
 import tech.staffjoy.web.view.Constant;
@@ -21,6 +24,7 @@ import tech.staffjoy.web.view.error.ErrorPageFactory;
 @Controller
 public class GlobalErrorController implements ErrorController {
 
+    private static final ILogger logger = SLoggerFactory.getLogger(GlobalErrorController.class);
 
     @Autowired
     ErrorPageFactory errorPageFactory;
@@ -51,7 +55,7 @@ public class GlobalErrorController implements ErrorController {
 
         if (exception != null) {
             if (envConfig.isDebug()) {  // no sentry aop in debug mode
-//                logger.error("Global error handling", exception);
+                logger.error("Global error handling", exception);
             } else {
 //                sentryClient.sendException((Exception)exception);
 //                UUID uuid = sentryClient.getContext().getLastEventId();

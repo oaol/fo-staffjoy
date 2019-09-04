@@ -13,6 +13,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.auth0.jwt.interfaces.DecodedJWT;
+import com.github.structlog4j.ILogger;
+import com.github.structlog4j.SLoggerFactory;
 
 import tech.staffjoy.account.client.AccountClient;
 import tech.staffjoy.account.dto.AccountDto;
@@ -30,9 +32,10 @@ import tech.staffjoy.web.view.PageFactory;
 
 @Controller
 public class ActivateController {
-//    static final ILogger logger = SLoggerFactory.getLogger(ActivateController.class);
-
-    @Autowired
+	
+	private static final ILogger logger = SLoggerFactory.getLogger(ActivateController.class);
+   
+	@Autowired
     private PageFactory pageFactory;
 
     @Autowired
@@ -93,6 +96,7 @@ public class ActivateController {
         page.setName(account.getName());
         page.setPhonenumber(account.getPhoneNumber());
 
+        logger.info("pagemessage", "email",page.getEmail(),"name",page.getName(),"phoneNumber",page.getPhonenumber());
         if (!HelperService.isPost(request)) {
             model.addAttribute(Constant.ATTRIBUTE_NAME_PAGE, page);
             return Constant.VIEW_ACTIVATE;

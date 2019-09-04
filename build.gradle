@@ -58,6 +58,12 @@ subprojects {
         implementation 'com.auth0:java-jwt:3.8.2'
         implementation 'org.springframework.boot:spring-boot-starter-actuator'
         implementation 'org.modelmapper:modelmapper:2.3.3'
+        
+        compile 'structlog4j:structlog4j-api:1.0.0'
+		 // Optional JSON formatter
+		compile 'structlog4j:structlog4j-json:1.0.0'
+		// Optional YAML formatter
+		compile 'structlog4j:structlog4j-yaml:1.0.0'
     }
 
     dependencyManagement {

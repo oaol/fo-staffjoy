@@ -16,6 +16,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.github.structlog4j.ILogger;
+import com.github.structlog4j.SLoggerFactory;
+
 import tech.staffjoy.account.dto.AccountDto;
 import tech.staffjoy.account.dto.AccountList;
 import tech.staffjoy.account.dto.CreateAccountRequest;
@@ -41,6 +44,9 @@ import tech.staffjoy.common.validation.PhoneNumber;
 @RestController
 @Validated
 public class AccountController {
+	
+    private static final ILogger logger = SLoggerFactory.getLogger(AccountController.class);
+
 
     @Autowired
     private AccountService accountService;
@@ -221,7 +227,7 @@ public class AccountController {
     private void validateEnv() {
         if (AuthConstant.AUTHORIZATION_SUPERPOWERS_SERVICE.equals(AuthContext.getAuthz())) {
             if (!EnvConstant.ENV_DEV.equals(this.envConfig.getName())) {
-//                logger.warn("Development service trying to connect outside development environment");
+                logger.warn("Development service trying to connect outside development environment");
                 throw new PermissionDeniedException("This service is not available outside development environments");
             }
         }
