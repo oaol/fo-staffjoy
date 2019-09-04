@@ -98,7 +98,7 @@ public interface CompanyClient {
     @DeleteMapping(path = "/worker")
     ResponseEntity<String> deleteWorker(@RequestHeader(AuthConstant.AUTHORIZATION_HEADER) String authz, @RequestBody @Validated WorkerDto workerDto);
 
-    @GetMapping(path = "/worker/of")
+    @GetMapping(path = "/worker/worker-of")
     ResponseEntity<WorkerOfList> getWorkerOf(@RequestHeader(AuthConstant.AUTHORIZATION_HEADER) String authz, @RequestParam("userId") String userId);
 
     @PostMapping(path = "/worker")

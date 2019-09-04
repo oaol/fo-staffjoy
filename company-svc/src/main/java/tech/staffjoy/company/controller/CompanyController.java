@@ -59,7 +59,7 @@ public class CompanyController {
             AuthConstant.AUTHORIZATION_WWW_SERVICE,
             AuthConstant.AUTHORIZATION_ICAL_SERVICE
     })
-    public ResponseEntity<CompanyDto> getCompany(@RequestParam("company_id") String companyId) {
+    public ResponseEntity<CompanyDto> getCompany(@RequestParam("companyId") String companyId) {
         if (AuthConstant.AUTHORIZATION_AUTHENTICATED_USER.equals(AuthContext.getAuthz())) {
             permissionService.checkPermissionCompanyDirectory(companyId);
         }
