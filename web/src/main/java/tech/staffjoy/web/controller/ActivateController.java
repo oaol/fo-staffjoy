@@ -24,6 +24,9 @@ import tech.staffjoy.common.auth.Sessions;
 import tech.staffjoy.common.crypto.Sign;
 import tech.staffjoy.common.env.EnvConfig;
 import tech.staffjoy.common.exception.ServiceException;
+import tech.staffjoy.company.client.CompanyClient;
+import tech.staffjoy.company.dto.AdminOfList;
+import tech.staffjoy.company.dto.WorkerOfList;
 import tech.staffjoy.web.properties.AppProps;
 import tech.staffjoy.web.service.HelperService;
 import tech.staffjoy.web.view.ActivatePage;
@@ -50,8 +53,8 @@ public class ActivateController {
     @Autowired
     private AccountClient accountClient;
 
-//    @Autowired
-//    private CompanyClient companyClient;
+    @Autowired
+    private CompanyClient companyClient;
 
     @RequestMapping(value = "/activate/{token}")
     public String activate(@PathVariable String token,
@@ -176,44 +179,43 @@ public class ActivateController {
 
         // TODO
         // Smart redirection - for onboarding purposes
-//        GetWorkerOfResponse workerOfResponse = null;
-//        try {
-//            workerOfResponse = companyClient.getWorkerOf(AuthConstant.AUTHORIZATION_WWW_SERVICE, account.getId());
-//        } catch (Exception ex) {
-//            String errMsg = "fail to get worker of list";
+        ResponseEntity<WorkerOfList> workerOfResponse = null;
+        try {
+            workerOfResponse = companyClient.getWorkerOf(AuthConstant.AUTHORIZATION_WWW_SERVICE, account.getId());
+        } catch (Exception ex) {
+            String errMsg = "fail to get worker of list";
 //            helperService.logException(logger, ex, errMsg);
-//            throw new ServiceException(errMsg, ex);
-//        }
-//        if (!workerOfResponse.isSuccess()) {
+            throw new ServiceException(errMsg, ex);
+        }
+        if (workerOfResponse.getStatusCode().isError()) {
 //            helperService.logError(logger, workerOfResponse.getMessage());
-//            throw new ServiceException(workerOfResponse.getMessage());
-//        }
-//        WorkerOfList workerOfList = workerOfResponse.getWorkerOfList();
-//
-//        GetAdminOfResponse getAdminOfResponse = null;
-//        try {
-//            getAdminOfResponse = companyClient.getAdminOf(AuthConstant.AUTHORIZATION_WWW_SERVICE, account.getId());
-//        } catch (Exception ex) {
-//            String errMsg = "fail to get admin of list";
+            throw new ServiceException(workerOfResponse.getStatusCode().getReasonPhrase());
+        }
+        WorkerOfList workerOfList = workerOfResponse.getBody();
+
+        ResponseEntity<AdminOfList> adminOfReponse = null;
+        try {
+            adminOfReponse = companyClient.getAdminOf(AuthConstant.AUTHORIZATION_WWW_SERVICE, account.getId());
+        } catch (Exception ex) {
+            String errMsg = "fail to get admin of list";
 //            helperService.logException(logger, ex, errMsg);
-//            throw new ServiceException(errMsg, ex);
-//        }
-//        if (!getAdminOfResponse.isSuccess()) {
+            throw new ServiceException(errMsg, ex);
+        }
+        if (adminOfReponse.getStatusCode().isError()) {
 //            helperService.logError(logger, getAdminOfResponse.getMessage());
-//            throw new ServiceException(getAdminOfResponse.getMessage());
-//        }
-//        AdminOfList adminOfList = getAdminOfResponse.getAdminOfList();
+            throw new ServiceException(adminOfReponse.getStatusCode().getReasonPhrase());
+        }
+        AdminOfList adminOfList = adminOfReponse.getBody();
 
         String destination = null;
-//        if (adminOfList.getCompanies().size() != 0 || account.isSupport()) {
-//            destination = helperService.buildUrl("http", "app." + envConfig.getExternalApex());
-//        } else if (workerOfList.getTeams().size() != 0) {
-//            destination = helperService.buildUrl("http", "myaccount." + envConfig.getExternalApex());
-//        } else {
-//            // onboard
-//            destination = helperService.buildUrl("http", "www." + envConfig.getExternalApex(), "/new_company/");
-//        }
-        destination = helperService.buildUrl("http", "www." + envConfig.getExternalApex(), "/new_company/");
+        if (adminOfList.getCompanies().size() != 0 || account.isSupport()) {
+            destination = helperService.buildUrl("http", "app." + envConfig.getExternalApex());
+        } else if (workerOfList.getTeams().size() != 0) {
+            destination = helperService.buildUrl("http", "myaccount." + envConfig.getExternalApex());
+        } else {
+            // onboard
+            destination = helperService.buildUrl("http", "www." + envConfig.getExternalApex(), "/new-company/");
+        }
 
         return "redirect:" + destination;
     }
