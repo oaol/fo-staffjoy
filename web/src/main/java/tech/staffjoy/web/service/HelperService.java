@@ -15,7 +15,7 @@ import com.github.structlog4j.SLoggerFactory;
 
 import tech.staffjoy.account.dto.AccountDto;
 import tech.staffjoy.common.exception.ServiceException;
-//import tech.staffjoy.company.dto.CompanyDto;
+import tech.staffjoy.company.dto.CompanyDto;
 import tech.staffjoy.mail.client.MailClient;
 import tech.staffjoy.web.controller.GlobalErrorController;
 import tech.staffjoy.mail.dto.EmailRequest;
@@ -73,7 +73,7 @@ public class HelperService {
 //        accountClient.syncUser(request);
 //    }
 
- /*   @Async(AppConfig.ASYNC_EXECUTOR_NAME)
+    @Async(AppConfig.ASYNC_EXECUTOR_NAME)
     public void sendEmailAsync(AccountDto a, CompanyDto c) {
         EmailRequest emailRequest = EmailRequest.builder()
                 .to("sales@staffjoy.xyz")
@@ -97,7 +97,7 @@ public class HelperService {
         if (sendResponse.getStatusCode().isError()) {
 //            logError(logger, baseResponse.getMessage());
         }
-    }*/
+    }
 
     public String buildUrl(String scheme, String host) {
         return buildUrl(scheme, host, null);
