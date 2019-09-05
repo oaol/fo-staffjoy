@@ -88,7 +88,7 @@ public class NewCompanyController {
                 throw new ServiceException(errMsg, ex);
             }
             if (accountResponse.getStatusCode().isError()) {
-//                helperService.logError(logger, genericAccountResponse.getMessage());
+                helperService.logError(logger, accountResponse.getStatusCode().getReasonPhrase());
                 throw new ServiceException(accountResponse.getStatusCode().getReasonPhrase());
             } else {
                 currentUser = accountResponse.getBody();
@@ -105,11 +105,11 @@ public class NewCompanyController {
                 createCompanyResponse = companyClient.createCompany(AuthConstant.AUTHORIZATION_WWW_SERVICE, companyDtoToCreate);
             } catch(Exception ex) {
                 String errMsg = "fail to create company";
-//                helperService.logException(logger, ex, errMsg);
+                helperService.logException(logger, ex, errMsg);
                 throw new ServiceException(errMsg, ex);
             }
             if (createCompanyResponse.getStatusCode().isError()) {
-//                helperService.logError(logger, genericCompanyResponse.getMessage());
+                helperService.logError(logger, createCompanyResponse.getStatusCode().getReasonPhrase());
                 throw new ServiceException(createCompanyResponse.getStatusCode().getReasonPhrase());
             }
 
@@ -125,11 +125,11 @@ public class NewCompanyController {
                 createDirectoryResponse = companyClient.createDirectory(AuthConstant.AUTHORIZATION_WWW_SERVICE, newDirectoryEntry);
             } catch(Exception ex) {
                 String errMsg = "fail to create directory";
-//                helperService.logException(logger, ex, errMsg);
+                helperService.logException(logger, ex, errMsg);
                 throw new ServiceException(errMsg, ex);
             }
             if (createDirectoryResponse.getStatusCode().isError()) {
-//                helperService.logError(logger, genericDirectoryResponse1.getMessage());
+                helperService.logError(logger, createDirectoryResponse.getStatusCode().getReasonPhrase());
                 throw new ServiceException(createDirectoryResponse.getStatusCode().getReasonPhrase());
             }
 
@@ -143,11 +143,11 @@ public class NewCompanyController {
                 createAdminReponse = companyClient.createAdmin(AuthConstant.AUTHORIZATION_WWW_SERVICE, directoryEntryRequest);
             } catch(Exception ex) {
                 String errMsg = "fail to create admin";
-//                helperService.logException(logger, ex, errMsg);
+                helperService.logException(logger, ex, errMsg);
                 throw new ServiceException(errMsg, ex);
             }
             if (createAdminReponse.getStatusCode().isError()) {
-//                helperService.logError(logger, genericDirectoryResponse2.getMessage());
+                helperService.logError(logger, createAdminReponse.getStatusCode().getReasonPhrase());
                 throw new ServiceException(createAdminReponse.getStatusCode().getReasonPhrase());
             }
 
@@ -162,11 +162,11 @@ public class NewCompanyController {
                 createTeamResponse = companyClient.createTeam(AuthConstant.AUTHORIZATION_WWW_SERVICE, createTeamRequest);
             } catch(Exception ex) {
                 String errMsg = "fail to create team";
-//                helperService.logException(logger, ex, errMsg);
+                helperService.logException(logger, ex, errMsg);
                 throw new ServiceException(errMsg, ex);
             }
             if (createTeamResponse.getStatusCode().isError()) {
-//                helperService.logError(logger, teamResponse.getMessage());
+                helperService.logError(logger, createTeamResponse.getStatusCode().getReasonPhrase());
                 throw new ServiceException(createTeamResponse.getStatusCode().getReasonPhrase());
             }
             TeamDto teamDto = createTeamResponse.getBody();
@@ -182,17 +182,17 @@ public class NewCompanyController {
                 createWorkerResponse = companyClient.createWorker(AuthConstant.AUTHORIZATION_WWW_SERVICE, workerDto);
             } catch(Exception ex) {
                 String errMsg = "fail to create worker";
-//                helperService.logException(logger, ex, errMsg);
+                helperService.logException(logger, ex, errMsg);
                 throw new ServiceException(errMsg, ex);
             }
 
             if (createWorkerResponse.getStatusCode().isError()) {
-//                helperService.logError(logger, directoryResponse.getMessage());
+                helperService.logError(logger, createWorkerResponse.getStatusCode().getReasonPhrase());
                 throw new ServiceException(createWorkerResponse.getStatusCode().getReasonPhrase());
             }
 
             // redirect
-//            logger.info(String.format("new company signup - %s", companyDto));
+            logger.info(String.format("new company signup - %s", companyDto));
             String url = helperService.buildUrl("http", "app." + envConfig.getExternalApex());
 
 //            helperService.syncUserAsync(currentUserId);

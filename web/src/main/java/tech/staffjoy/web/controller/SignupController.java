@@ -46,22 +46,21 @@ public class SignupController {
                 .email(email)
                 .build();
 
-        ResponseEntity<AccountDto> createAccount = null;
+        ResponseEntity<AccountDto> createAccountResponse = null;
         try {
-            createAccount = accountClient.createAccount(AuthConstant.AUTHORIZATION_WWW_SERVICE, request);
+            createAccountResponse = accountClient.createAccount(AuthConstant.AUTHORIZATION_WWW_SERVICE, request);
         } catch (Exception ex) {
             String errMsg = "Failed to create account";
-//            helperService.logException(logger, ex, errMsg);
-            ex.printStackTrace();
+            helperService.logException(logger, ex, errMsg);
             return SIGN_UP_REDIRECT_PATH;
         }
 
-        if (createAccount.getStatusCode().isError()) {
-//            helperService.logError(logger, genericAccountResponse.getMessage());
+        if (createAccountResponse.getStatusCode().isError()) {
+            helperService.logError(logger, createAccountResponse.getStatusCode().getReasonPhrase());
             return SIGN_UP_REDIRECT_PATH;
         }
-        AccountDto account = createAccount.getBody();
-//        logger.info(String.format("New Account signup - %s", account));
+        AccountDto account = createAccountResponse.getBody();
+        logger.info(String.format("New Account signup - %s", account));
 
         model.addAttribute(Constant.ATTRIBUTE_NAME_PAGE, pageFactory.buildConfirmPage());
         return Constant.VIEW_CONFIRM;

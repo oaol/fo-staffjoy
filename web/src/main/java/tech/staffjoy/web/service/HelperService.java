@@ -41,15 +41,15 @@ public class HelperService {
         return METHOD_POST.equals(request.getMethod());
     }
 
-//    public void logError(ILogger log, String errMsg) {
-//        log.error(errMsg);
+    public void logError(ILogger log, String errMsg) {
+        log.error(errMsg);
 //        sentryClient.sendMessage(errMsg);
-//    }
-//
-//    public void logException(ILogger log, Exception ex, String errMsg) {
-//        log.error(errMsg, ex);
+    }
+
+    public void logException(ILogger log, Exception ex, String errMsg) {
+        log.error(errMsg, ex);
 //        sentryClient.sendException(ex);
-//    }
+    }
 //
 //    @Async(AppConfig.ASYNC_EXECUTOR_NAME)
 //    public void trackEventAsync(String userId, String event) {
@@ -92,10 +92,10 @@ public class HelperService {
             sendResponse = mailClient.send(emailRequest);
         } catch (Exception ex) {
             String errMsg = "Unable to send email";
-//            logException(logger, ex, errMsg);
+            logException(logger, ex, errMsg);
         }
         if (sendResponse.getStatusCode().isError()) {
-//            logError(logger, baseResponse.getMessage());
+            logError(logger, sendResponse.getStatusCode().getReasonPhrase());
         }
     }
 

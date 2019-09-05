@@ -77,7 +77,7 @@ public class ActivateController {
             userId = jwt.getClaim(Sign.CLAIM_USER_ID).asString();
         } catch (Exception ex) {
             String errMsg = "Failed to verify email confirmation token";
-//            helperService.logException(logger, ex, errMsg);
+            helperService.logException(logger, ex, errMsg);
             return "redirect:" + ResetController.PASSWORD_RESET_PATH;
         }
 
@@ -86,11 +86,11 @@ public class ActivateController {
             accountResponse = accountClient.getAccount(AuthConstant.AUTHORIZATION_WWW_SERVICE, userId);
         } catch (Exception ex) {
             String errMsg = "fail to get user account";
-//            helperService.logException(logger, ex, errMsg);
+            helperService.logException(logger, ex, errMsg);
             throw new ServiceException(errMsg, ex);
         }
         if (accountResponse.getStatusCode().isError()) {
-//            helperService.logError(logger, genericAccountResponse1.getMessage());
+            helperService.logError(logger, accountResponse.getStatusCode().getReasonPhrase());
             throw new ServiceException(accountResponse.getStatusCode().getReasonPhrase());
         }
         AccountDto account = accountResponse.getBody();
@@ -133,13 +133,13 @@ public class ActivateController {
             updateAccountResponse = accountClient.updateAccount(AuthConstant.AUTHORIZATION_WWW_SERVICE, account);
         } catch (Exception ex) {
             String errMsg = "fail to update user account";
-//            helperService.logException(logger, ex, errMsg);
+            helperService.logException(logger, ex, errMsg);
             page.setErrorMessage(errMsg);
             model.addAttribute(Constant.ATTRIBUTE_NAME_PAGE, page);
             return Constant.VIEW_ACTIVATE;
         }
         if (updateAccountResponse.getStatusCode().isError()) {
-//            helperService.logError(logger, genericAccountResponse2.getMessage());
+            helperService.logError(logger, updateAccountResponse.getStatusCode().getReasonPhrase());
             page.setErrorMessage(updateAccountResponse.getStatusCode().getReasonPhrase());
             model.addAttribute(Constant.ATTRIBUTE_NAME_PAGE, page);
             return Constant.VIEW_ACTIVATE;
@@ -155,13 +155,13 @@ public class ActivateController {
             updatePasswordResponse = accountClient.updatePassword(AuthConstant.AUTHORIZATION_WWW_SERVICE, updatePasswordRequest);
         } catch (Exception ex) {
             String errMsg = "fail to update password";
-//            helperService.logException(logger, ex, errMsg);
+            helperService.logException(logger, ex, errMsg);
             page.setErrorMessage(errMsg);
             model.addAttribute(Constant.ATTRIBUTE_NAME_PAGE, page);
             return Constant.VIEW_ACTIVATE;
         }
         if (updatePasswordResponse.getStatusCode().isError()) {
-//            helperService.logError(logger, baseResponse.getMessage());
+            helperService.logError(logger, updatePasswordResponse.getStatusCode().getReasonPhrase());
             page.setErrorMessage(updatePasswordResponse.getStatusCode().getReasonPhrase());
             model.addAttribute(Constant.ATTRIBUTE_NAME_PAGE, page);
             return Constant.VIEW_ACTIVATE;
@@ -174,7 +174,7 @@ public class ActivateController {
                 appProps.getSigningSecret(),
                 envConfig.getExternalApex(),
                 response);
-//        logger.info("user activated account and logged in", "user_id", account.getId());
+        logger.info("user activated account and logged in", "user_id", account.getId());
 
 
         // TODO
@@ -184,11 +184,11 @@ public class ActivateController {
             workerOfResponse = companyClient.getWorkerOf(AuthConstant.AUTHORIZATION_WWW_SERVICE, account.getId());
         } catch (Exception ex) {
             String errMsg = "fail to get worker of list";
-//            helperService.logException(logger, ex, errMsg);
+            helperService.logException(logger, ex, errMsg);
             throw new ServiceException(errMsg, ex);
         }
         if (workerOfResponse.getStatusCode().isError()) {
-//            helperService.logError(logger, workerOfResponse.getMessage());
+            helperService.logError(logger, workerOfResponse.getStatusCode().getReasonPhrase());
             throw new ServiceException(workerOfResponse.getStatusCode().getReasonPhrase());
         }
         WorkerOfList workerOfList = workerOfResponse.getBody();
@@ -198,11 +198,11 @@ public class ActivateController {
             adminOfReponse = companyClient.getAdminOf(AuthConstant.AUTHORIZATION_WWW_SERVICE, account.getId());
         } catch (Exception ex) {
             String errMsg = "fail to get admin of list";
-//            helperService.logException(logger, ex, errMsg);
+            helperService.logException(logger, ex, errMsg);
             throw new ServiceException(errMsg, ex);
         }
         if (adminOfReponse.getStatusCode().isError()) {
-//            helperService.logError(logger, getAdminOfResponse.getMessage());
+            helperService.logError(logger, adminOfReponse.getStatusCode().getReasonPhrase());
             throw new ServiceException(adminOfReponse.getStatusCode().getReasonPhrase());
         }
         AdminOfList adminOfList = adminOfReponse.getBody();
