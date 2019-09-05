@@ -8,6 +8,9 @@ import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.github.structlog4j.ILogger;
+import com.github.structlog4j.SLoggerFactory;
+
 import tech.staffjoy.account.client.AccountClient;
 import tech.staffjoy.account.dto.AccountDto;
 import tech.staffjoy.common.auth.AuthConstant;
@@ -30,7 +33,7 @@ import tech.staffjoy.web.view.PageFactory;
 @Controller
 public class NewCompanyController {
 
-//    static final ILogger logger = SLoggerFactory.getLogger(LoginController.class);
+    static final ILogger logger = SLoggerFactory.getLogger(LoginController.class);
 
     static final String DEFAULT_TIMEZONE = "UTC";
     static final String DEFAULT_DAYWEEK_STARTS = "Monday";
@@ -81,7 +84,7 @@ public class NewCompanyController {
                 accountResponse = accountClient.getAccount(AuthConstant.AUTHORIZATION_WWW_SERVICE, currentUserId);
             } catch(Exception ex) {
                 String errMsg = "fail to get user account";
-//                helperService.logException(logger, ex, errMsg);
+                helperService.logException(logger, ex, errMsg);
                 throw new ServiceException(errMsg, ex);
             }
             if (accountResponse.getStatusCode().isError()) {

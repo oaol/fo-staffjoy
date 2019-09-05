@@ -72,7 +72,7 @@ function intercomLauncher(env, customLauncher, launcherId) {
         withCredentials: true
       },
       success: function(data, statusText, xhr) {
-        window.intercomSettings = data
+        window.intercomSettings = data;
         if (customLauncher) {
           window.intercomSettings['custom_launcher_selector'] = launcherId;
           //window.intercomSettings['hide_default_launcher'] = false;
@@ -138,7 +138,7 @@ function intercomLauncher(env, customLauncher, launcherId) {
                   var x = d.getElementsByTagName('script')[0];
                   x.parentNode.insertBefore(s, x);
               }
-              l()
+              l();
               if (w.attachEvent) {
                   w.attachEvent('onload', l);
               } else {
@@ -149,4 +149,4 @@ function intercomLauncher(env, customLauncher, launcherId) {
 
       }
   });
-};
+}

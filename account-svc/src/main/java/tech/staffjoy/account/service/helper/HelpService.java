@@ -7,6 +7,9 @@ import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
 
+import com.github.structlog4j.ILogger;
+import com.github.structlog4j.SLoggerFactory;
+
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import tech.staffjoy.account.config.AppConfig;
@@ -20,6 +23,8 @@ import tech.staffjoy.common.exception.ServiceException;
 @Slf4j
 public class HelpService {
 
+    static final ILogger logger = SLoggerFactory.getLogger(HelpService.class);
+
 //    private final CompanyClient companyClient;
 
     private final AccountRepository accountRepository;
@@ -30,6 +35,11 @@ public class HelpService {
 
     private final EnvConfig envConfig;
 
+    /**
+     * async user info to intercom
+     * 
+     * @param userId
+     */
     @Async(AppConfig.ASYNC_EXECUTOR_NAME)
     public void syncUserAsync(String userId) {
         if (envConfig.isDebug()) {
@@ -46,10 +56,11 @@ public class HelpService {
             return;
         }
 
+        // async to Intercom
 //        // use a map to de-dupe
 //        Map<String, CompanyDto> memberships = new HashMap<>();
 //
-//        GetWorkerOfResponse workerOfResponse = null;
+//        ResponseEntity<WorkerOfList> workerOfResponse = null;
 //        try {
 //            workerOfResponse = companyClient.getWorkerOf(AuthConstant.AUTHORIZATION_ACCOUNT_SERVICE, userId);
 //        } catch(Exception ex) {
@@ -57,46 +68,46 @@ public class HelpService {
 //            handleException(logger, ex, errMsg);
 //            throw new ServiceException(errMsg, ex);
 //        }
-//        if (!workerOfResponse.isSuccess()) {
-//            handleError(logger, workerOfResponse.getMessage());
-//            throw new ServiceException(workerOfResponse.getMessage());
+//        if (workerOfResponse.getStatusCode().isError()) {
+//            handleError(logger, workerOfResponse.getStatusCode().getReasonPhrase());
+//            throw new ServiceException(workerOfResponse.getStatusCode().getReasonPhrase());
 //        }
-//        WorkerOfList workerOfList = workerOfResponse.getWorkerOfList();
-//
+//        WorkerOfList workerOfList = workerOfResponse.getBody();
 //        boolean isWorker = workerOfList.getTeams().size() > 0;
+//
 //        for(TeamDto teamDto : workerOfList.getTeams()) {
-//            GenericCompanyResponse genericCompanyResponse = null;
+//            ResponseEntity<CompanyDto> companyResponse = null;
 //            try {
-//                genericCompanyResponse = companyClient.getCompany(AuthConstant.AUTHORIZATION_ACCOUNT_SERVICE, teamDto.getCompanyId());
+//                companyResponse = companyClient.getCompany(AuthConstant.AUTHORIZATION_ACCOUNT_SERVICE, teamDto.getCompanyId());
 //            } catch (Exception ex) {
 //                String errMsg = "could not fetch companyDto from teamDto";
 //                handleException(logger, ex, errMsg);
 //                throw new ServiceException(errMsg, ex);
 //            }
 //
-//            if (!genericCompanyResponse.isSuccess()) {
-//                handleError(logger, genericCompanyResponse.getMessage());
-//                throw new ServiceException(genericCompanyResponse.getMessage());
+//            if (companyResponse.getStatusCode().isError()) {
+//                handleError(logger, companyResponse.getStatusCode().getReasonPhrase());
+//                throw new ServiceException(companyResponse.getStatusCode().getReasonPhrase());
 //            }
 //
-//            CompanyDto companyDto = genericCompanyResponse.getCompany();
+//            CompanyDto companyDto = companyResponse.getBody();
 //
 //            memberships.put(companyDto.getId(), companyDto);
 //        }
-
-//        GetAdminOfResponse getAdminOfResponse = null;
+//
+//        ResponseEntity<AdminOfList> adminOfResponse = null;
 //        try {
-//            getAdminOfResponse = companyClient.getAdminOf(AuthConstant.AUTHORIZATION_ACCOUNT_SERVICE, userId);
+//            adminOfResponse = companyClient.getAdminOf(AuthConstant.AUTHORIZATION_ACCOUNT_SERVICE, userId);
 //        } catch (Exception ex) {
 //            String errMsg = "could not fetch adminOfList";
 //            handleException(logger, ex, errMsg);
 //            throw new ServiceException(errMsg, ex);
 //        }
-//        if (!getAdminOfResponse.isSuccess()) {
-//            handleError(logger, getAdminOfResponse.getMessage());
-//            throw new ServiceException(getAdminOfResponse.getMessage());
+//        if (adminOfResponse.getStatusCode().isError()) {
+//            handleError(logger, adminOfResponse.getStatusCode().getReasonPhrase());
+//            throw new ServiceException(adminOfResponse.getStatusCode().getReasonPhrase());
 //        }
-//        AdminOfList adminOfList = getAdminOfResponse.getAdminOfList();
+//        AdminOfList adminOfList = adminOfResponse.getBody();
 //
 //        boolean isAdmin = adminOfList.getCompanies().size() > 0;
 //        for(CompanyDto companyDto : adminOfList.getCompanies()) {
@@ -195,17 +206,17 @@ public class HelpService {
         return false;
     }
 
-//    public void handleError(ILogger log, String errMsg) {
-//        log.error(errMsg);
+    public void handleError(ILogger log, String errMsg) {
+        log.error(errMsg);
 //        if (!envConfig.isDebug()) {
 //            sentryClient.sendMessage(errMsg);
 //        }
-//    }
+    }
 
-//    public void handleException(ILogger log, Exception ex, String errMsg) {
-//        log.error(errMsg, ex);
+    public void handleException(ILogger log, Exception ex, String errMsg) {
+        log.error(errMsg, ex);
 //        if (!envConfig.isDebug()) {
 //            sentryClient.sendException(ex);
 //        }
-//    }
+    }
 }

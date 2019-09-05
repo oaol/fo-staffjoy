@@ -19,6 +19,9 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
+import com.github.structlog4j.ILogger;
+import com.github.structlog4j.SLoggerFactory;
+
 import lombok.RequiredArgsConstructor;
 import tech.staffjoy.account.AccountConstant;
 import tech.staffjoy.account.dto.AccountDto;
@@ -28,6 +31,7 @@ import tech.staffjoy.account.model.AccountSecret;
 import tech.staffjoy.account.reporsitory.AccountRepository;
 import tech.staffjoy.account.reporsitory.AccountSecretRepository;
 import tech.staffjoy.account.service.helper.HelpService;
+import tech.staffjoy.common.auditlog.LogEntry;
 import tech.staffjoy.common.auth.AuthConstant;
 import tech.staffjoy.common.auth.AuthContext;
 import tech.staffjoy.common.crypto.Sign;
@@ -40,6 +44,8 @@ import tech.staffjoy.mail.dto.EmailRequest;
 @Service
 @RequiredArgsConstructor
 public class AccountService {
+
+    static final ILogger logger = SLoggerFactory.getLogger(AccountService.class);
 
     private final AccountRepository accountRepository;
 
@@ -124,11 +130,11 @@ public class AccountService {
             accountRepository.save(account);
         } catch (Exception ex) {
             String errMsg = "Could not create user account";
-//            serviceHelper.handleException(logger, ex, errMsg);
+            helpService.handleException(logger, ex, errMsg);
             throw new ServiceException(errMsg, ex);
         }
 
-        helpService.syncUserAsync(account.getId());
+//        serviceHelper.syncUserAsync(account.getId());
 
         if (StringUtils.hasText(email)) {
             // Email confirmation
@@ -144,15 +150,15 @@ public class AccountService {
 
         // todo - sms onboarding (if worker??)
 
-//        LogEntry auditLog = LogEntry.builder()
-//                .authorization(AuthContext.getAuthz())
-//                .currentUserId(AuthContext.getUserId())
-//                .targetType("account")
-//                .targetId(account.getId())
-//                .updatedContents(account.toString())
-//                .build();
-//
-//        logger.info("created account", auditLog);
+        LogEntry auditLog = LogEntry.builder()
+                .authorization(AuthContext.getAuthz())
+                .currentUserId(AuthContext.getUserId())
+                .targetType("account")
+                .targetId(account.getId())
+                .updatedContents(account.toString())
+                .build();
+
+        logger.info("created account", auditLog);
 
         AccountDto accountDto = this.convertToDto(account);
         return accountDto;
@@ -237,29 +243,30 @@ public class AccountService {
             accountRepository.save(newAccount);
         } catch (Exception ex) {
             String errMsg = "Could not update the user account";
-//            helpService.handleException(logger, ex, errMsg);
+            helpService.handleException(logger, ex, errMsg);
             throw new ServiceException(errMsg, ex);
         }
 
         helpService.syncUserAsync(newAccount.getId());
 
-//        LogEntry auditLog = LogEntry.builder()
-//                .authorization(AuthContext.getAuthz())
-//                .currentUserId(AuthContext.getUserId())
-//                .targetType("account")
-//                .targetId(newAccount.getId())
-//                .originalContents(existingAccount.toString())
-//                .updatedContents(newAccount.toString())
-//                .build();
-//
-//        logger.info("updated account", auditLog);
+        LogEntry auditLog = LogEntry.builder()
+                .authorization(AuthContext.getAuthz())
+                .currentUserId(AuthContext.getUserId())
+                .targetType("account")
+                .targetId(newAccount.getId())
+                .originalContents(existingAccount.toString())
+                .updatedContents(newAccount.toString())
+                .build();
 
+        logger.info("updated account", auditLog);
+
+        // TODO
         // If account is being activated, or if phone number is changed by current user - send text
-        if (newAccount.isConfirmedAndActive() &&
-                StringUtils.hasText(newAccount.getPhoneNumber()) &&
-                !newAccount.getPhoneNumber().equals(existingAccount.getPhoneNumber())) {
-//            serviceHelper.sendSmsGreeting(newAccount.getId());
-        }
+//        if (newAccount.isConfirmedAndActive() &&
+//                StringUtils.hasText(newAccount.getPhoneNumber()) &&
+//                !newAccount.getPhoneNumber().equals(existingAccount.getPhoneNumber())) {
+////            serviceHelper.sendSmsGreeting(newAccount.getId());
+//        }
 
         this.trackEventWithAuthCheck("account_updated");
 
@@ -276,14 +283,14 @@ public class AccountService {
             throw new ServiceException("user with specified id not found");
         }
 
-//        LogEntry auditLog = LogEntry.builder()
-//                .authorization(AuthContext.getAuthz())
-//                .currentUserId(AuthContext.getUserId())
-//                .targetType("account")
-//                .targetId(userId)
-//                .build();
-//
-//        logger.info("updated password", auditLog);
+        LogEntry auditLog = LogEntry.builder()
+                .authorization(AuthContext.getAuthz())
+                .currentUserId(AuthContext.getUserId())
+                .targetType("account")
+                .targetId(userId)
+                .build();
+
+        logger.info("updated password", auditLog);
 
         this.trackEventWithAuthCheck("password_updated");
     }
