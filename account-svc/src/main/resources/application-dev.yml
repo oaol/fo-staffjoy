@@ -7,8 +7,6 @@ spring:
     show-sql: true
 server:
   port: 8081
-  servlet:
-    context-path: /account
 staffjoy:
   email-service-endpoint: http://localhost:8083
   company-service-endpoint: http://localhost:8082

@@ -1,7 +1,5 @@
 server:
   port: 8083
-  servlet:
-    context-path: /mail
 staffjoy:
   email-service-endpoint: http://localhost:8083
   company-service-endpoint: http://localhost:8082

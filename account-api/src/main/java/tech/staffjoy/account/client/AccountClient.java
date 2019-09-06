@@ -29,7 +29,7 @@ import tech.staffjoy.account.dto.VerifyPasswordRequest;
 import tech.staffjoy.common.auth.AuthConstant;
 import tech.staffjoy.common.validation.PhoneNumber;
 
-@FeignClient(name = AccountConstant.SERVICE_NAME, path = "/account/account", url = "${staffjoy.account-service-endpoint}")
+@FeignClient(name = AccountConstant.SERVICE_NAME, path = "/v1/account", url = "${staffjoy.account-service-endpoint}")
 // TODO Client side validation can be enabled as needed
 // @Validated
 public interface AccountClient {

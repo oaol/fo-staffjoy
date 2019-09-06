@@ -40,7 +40,7 @@ import tech.staffjoy.common.env.EnvConstant;
 import tech.staffjoy.common.exception.ServiceException;
 import tech.staffjoy.common.validation.PhoneNumber;
 
-@RequestMapping("/account")
+@RequestMapping("/v1/account")
 @RestController
 @Validated
 public class AccountController {

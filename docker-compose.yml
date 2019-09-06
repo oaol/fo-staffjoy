@@ -1,0 +1,84 @@
+version: '3.7'
+
+services:
+    mail-service:
+      build: ./mail-svc
+      image: fo/mail-svc
+      environment:
+        - SPRING_PROFILES_ACTIVE
+        - SERVER_PORT
+        - ALIYUN_ACCESS_KEY
+        - ALIYUN_ACCESS_SECRET
+      networks:
+        - internal_access
+        - external_access # db access
+
+    account-service:
+      build: ./account-svc
+      image: fo/account-svc
+      environment:
+        - SPRING_PROFILES_ACTIVE
+        - SERVER_PORT
+        - EMAIL_SERVICE_ENDPOINT
+        - COMPANY_SERVICE_ENDPOINT
+        - ACCOUNT_DATASOURCE_URL
+        - ACCOUNT_DATASOURCE_USERNAME
+        - ACCOUNT_DATASOURCE_PASSWORD
+      depends_on:
+        - mail-service
+      networks:
+        - internal_access
+        - external_access # db access
+    company-service:
+        build: ./company-svc
+        image: fo/company-svc
+        environment:
+            - SPRING_PROFILES_ACTIVE
+            - SERVER_PORT
+            - EMAIL_SERVICE_ENDPOINT
+            - ACCOUNT_SERVICE_ENDPOINT
+            - COMPANY_DATASOURCE_URL
+            - COMPANY_DATASOURCE_USERNAME
+            - COMPANY_DATASOURCE_PASSWORD
+        depends_on:
+            - mail-service
+        networks:
+            - internal_access
+            - external_access # db access
+    www-service:
+        build: ./web
+        image: fo/www-svc
+        environment:
+            - SPRING_PROFILES_ACTIVE
+            - SERVER_PORT
+            - SENTRY_DSN
+            - ACCOUNT_SERVICE_ENDPOINT
+            - COMPANY_SERVICE_ENDPOINT
+            - EMAIL_SERVICE_ENDPOINT
+            - RECAPTCHA_PUBLIC
+            - RECAPTCHA_PRIVATE
+        depends_on:
+            - account-service
+            - company-service
+            - mail-service
+        networks:
+            - internal_access
+    faraday-service:
+        build: ./faraday
+        image: fo/faraday-svc
+        ports:
+            - 80:80
+        environment:
+            - SPRING_PROFILES_ACTIVE
+            - SERVER_PORT
+        depends_on:
+            - account-service
+            - company-service
+            - www-service
+        networks:
+            - internal_access
+            - external_access
+networks:
+  internal_access:
+    internal: true
+  external_access:

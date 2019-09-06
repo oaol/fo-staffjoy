@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import tech.staffjoy.mail.MailConstant;
 import tech.staffjoy.mail.dto.EmailRequest;
 
-@FeignClient(name = MailConstant.SERVICE_NAME, path = "/mail", url = "${staffjoy.email-service-endpoint}")
+@FeignClient(name = MailConstant.SERVICE_NAME, path = "/v1/mail", url = "${staffjoy.email-service-endpoint}")
 public interface MailClient {
 
     @PostMapping(path = "/send")
