@@ -1,7 +1,0 @@
-description = 'Account API/DTO for sharing between Client/Server'
-
-dependencies {
-    compile project(':common-lib')
-    compile project(':account-api')
-    compile project(':mail-api')
-}
