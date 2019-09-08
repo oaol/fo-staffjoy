@@ -1,4 +1,4 @@
-package fo.staffjoy.account.controller;
+package tech.staffjoy.account.controller;
 
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -7,7 +7,7 @@ import org.springframework.cloud.openfeign.EnableFeignClients;
 import org.springframework.context.annotation.Import;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import fo.staffjoy.account.TestConfig;
+import tech.staffjoy.account.TestConfig;
 import tech.staffjoy.account.client.AccountClient;
 
 @RunWith(SpringRunner.class)
@@ -18,4 +18,6 @@ public class AccountControllerTest {
 
     @Autowired
     AccountClient accountClient;
+    
+    
 }
