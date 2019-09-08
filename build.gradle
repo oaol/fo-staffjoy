@@ -32,10 +32,6 @@ subprojects {
         options.encoding = 'UTF-8'
     }
 
-    configurations {
-        compile.exclude module: 'spring-boot-starter-logging'
-    }
-
     repositories {
         maven { url 'http://maven.aliyun.com/nexus/content/groups/public/' }
         jcenter()
@@ -49,7 +45,6 @@ subprojects {
         annotationProcessor 'org.projectlombok:lombok'
         compile 'org.springframework.boot:spring-boot-devtools'
         testImplementation 'org.springframework.boot:spring-boot-starter-test'
-        implementation 'org.springframework.boot:spring-boot-starter-log4j2'
         implementation 'org.springframework.boot:spring-boot-starter-web'
         implementation 'org.springframework.cloud:spring-cloud-starter-openfeign'
         // use in-memory db for unit testing
@@ -58,12 +53,11 @@ subprojects {
         implementation 'com.auth0:java-jwt:3.8.2'
         implementation 'org.springframework.boot:spring-boot-starter-actuator'
         implementation 'org.modelmapper:modelmapper:2.3.3'
-        
-        compile 'structlog4j:structlog4j-api:1.0.0'
-		 // Optional JSON formatter
-		compile 'structlog4j:structlog4j-json:1.0.0'
-		// Optional YAML formatter
-		compile 'structlog4j:structlog4j-yaml:1.0.0'
+        implementation 'structlog4j:structlog4j-api:1.0.0'
+         // Optional JSON formatter
+        implementation 'structlog4j:structlog4j-json:1.0.0'
+        // Optional YAML formatter
+        implementation 'structlog4j:structlog4j-yaml:1.0.0'
     }
 
     dependencyManagement {

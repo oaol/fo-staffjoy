@@ -20,7 +20,7 @@
     <root level="info">
         <appender-ref ref="ConsoleAppender" />
     </root>
-    <logger name="fo.staffjoy" additivity="false" level="info">
+    <logger name="tech.staffjoy" additivity="false" level="info">
         <appender-ref ref="ConsoleAppender" />
     </logger>
 </configuration>

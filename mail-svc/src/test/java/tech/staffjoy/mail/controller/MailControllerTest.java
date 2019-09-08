@@ -1,4 +1,4 @@
-package fo.staffjoy.mail.controller;
+package tech.staffjoy.mail.controller;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.ArgumentMatchers.any;

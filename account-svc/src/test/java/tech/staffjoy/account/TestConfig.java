@@ -1,4 +1,4 @@
-package fo.staffjoy.account;
+package tech.staffjoy.account;
 
 import java.util.UUID;
 

@@ -14,7 +14,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import tech.staffjoy.account.config.AppConfig;
 import tech.staffjoy.account.model.Account;
-import tech.staffjoy.account.reporsitory.AccountRepository;
+import tech.staffjoy.account.repository.AccountRepository;
 import tech.staffjoy.common.env.EnvConfig;
 import tech.staffjoy.common.exception.ServiceException;
 

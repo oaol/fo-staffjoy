@@ -1,4 +1,4 @@
-package fo.staffjoy.mail;
+package tech.staffjoy.mail;
 
 import java.util.UUID;
 
