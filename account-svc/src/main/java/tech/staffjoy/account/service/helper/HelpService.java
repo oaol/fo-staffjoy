@@ -47,7 +47,7 @@ public class HelpService {
             return;
         }
 
-        Account account = accountRepository.findAccountById(userId);
+        Account account = accountRepository.findAccountById(userId).get();
         if (account == null) {
             throw new ServiceException(String.format("User with id %s not found", userId));
         }

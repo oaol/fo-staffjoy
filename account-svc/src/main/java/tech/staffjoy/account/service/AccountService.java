@@ -73,10 +73,10 @@ public class AccountService {
         // check for existing user
         Account existingAccount = null;
         if (StringUtils.hasText(email)) {
-            existingAccount = accountRepository.findAccountByEmail(email);
+            existingAccount = accountRepository.findAccountByEmail(email).get();
         }
         if (existingAccount == null && StringUtils.hasText(phoneNumber)) {
-            existingAccount = accountRepository.findAccountByPhoneNumber(phoneNumber);
+            existingAccount = accountRepository.findAccountByPhoneNumber(phoneNumber).get();
         }
 
         if (existingAccount != null) {
@@ -86,7 +86,7 @@ public class AccountService {
     }
 
     public AccountDto getAccountByPhoneNumber(String phoneNumber) {
-        Account account = accountRepository.findAccountByPhoneNumber(phoneNumber);
+        Account account = accountRepository.findAccountByPhoneNumber(phoneNumber).get();
         if (account == null) {
             // ResultCode.NOT_FOUND,
             throw new ServiceException("User with specified phonenumber not found");
@@ -97,13 +97,13 @@ public class AccountService {
     public AccountDto create(String name, String email, String phoneNumber) {
         if (StringUtils.hasText(email)) {
             // Check to see if account exists
-            Account foundAccount = accountRepository.findAccountByEmail(email);
+            Account foundAccount = accountRepository.findAccountByEmail(email).get();
             if (foundAccount != null) {
                 throw new ServiceException("A user with that email already exists. Try a password reset");
             }
         }
         if (StringUtils.hasText(phoneNumber)) {
-            Account foundAccount = accountRepository.findAccountByPhoneNumber(phoneNumber);
+            Account foundAccount = accountRepository.findAccountByPhoneNumber(phoneNumber).get();
             if (foundAccount != null) {
                 throw new ServiceException("A user with that phonenumber already exists. Try a password reset");
             }
@@ -181,7 +181,7 @@ public class AccountService {
     }
 
     public AccountDto get(String userId) {
-        Account account = accountRepository.findAccountById(userId);
+        Account account = accountRepository.findAccountById(userId).get();
         if (account == null) {
             throw new ServiceException(String.format("User with id %s not found", userId));
         }
@@ -191,7 +191,7 @@ public class AccountService {
     public AccountDto update(AccountDto newAccountDto) {
         Account newAccount = this.convertToModel(newAccountDto);
 
-        Account existingAccount = accountRepository.findAccountById(newAccount.getId());
+        Account existingAccount = accountRepository.findAccountById(newAccount.getId()).get();
         if (existingAccount == null) {
             throw new ServiceException(String.format("User with id %s not found", newAccount.getId()));
         }
@@ -203,7 +203,7 @@ public class AccountService {
         }
 
         if (StringUtils.hasText(newAccount.getEmail()) && !newAccount.getEmail().equals(existingAccount.getEmail())) {
-            Account foundAccount = accountRepository.findAccountByEmail(newAccount.getEmail());
+            Account foundAccount = accountRepository.findAccountByEmail(newAccount.getEmail()).get();
             if (foundAccount != null) {
                 // ResultCode.REQ_REJECT
                 throw new ServiceException("A user with that email already exists. Try a password reset");
@@ -211,7 +211,7 @@ public class AccountService {
         }
 
         if (StringUtils.hasText(newAccount.getPhoneNumber()) && !newAccount.getPhoneNumber().equals(existingAccount.getPhoneNumber())) {
-            Account foundAccount = accountRepository.findAccountByPhoneNumber(newAccount.getPhoneNumber());
+            Account foundAccount = accountRepository.findAccountByPhoneNumber(newAccount.getPhoneNumber()).get();
             if (foundAccount != null) {
                 // ResultCode.REQ_REJECT
                 throw new ServiceException("A user with that phonenumber already exists. Try a password reset");
@@ -296,7 +296,7 @@ public class AccountService {
     }
 
     public AccountDto verifyPassword(String email, String password) {
-        AccountSecret accountSecret = accountSecretRepository.findAccountSecretByEmail(email);
+        AccountSecret accountSecret = accountSecretRepository.findAccountSecretByEmail(email).get();
         if (accountSecret == null) {
             // ResultCode.NOT_FOUND
             throw new ServiceException("account with specified email not found");
@@ -317,7 +317,7 @@ public class AccountService {
             throw new ServiceException("Incorrect password");
         }
 
-        Account account = accountRepository.findAccountById(accountSecret.getId());
+        Account account = accountRepository.findAccountById(accountSecret.getId()).get();
         if (account == null) {
             throw new ServiceException(String.format("User with id %s not found", accountSecret.getId()));
         }
@@ -331,7 +331,7 @@ public class AccountService {
     public void requestPasswordReset(String email) {
         String newEmail = email.toLowerCase().trim();
 
-        Account account = accountRepository.findAccountByEmail(email);
+        Account account = accountRepository.findAccountByEmail(email).get();
         if(account == null) {
             // ResultCode.NOT_FOUND,
             throw new ServiceException("No user with that email exists");
@@ -353,7 +353,7 @@ public class AccountService {
 
     // requestEmailChange sends an email to a user with a confirm email link
     public void requestEmailChange(String userId, String email) {
-        Account account = accountRepository.findAccountById(userId);
+        Account account = accountRepository.findAccountById(userId).get();
         if (account == null) {
             // ResultCode.NOT_FOUND,
             throw new ServiceException(String.format("User with id %s not found", userId));

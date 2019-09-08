@@ -28,7 +28,7 @@ import tech.staffjoy.account.model.AccountSecret;
 public class AccountRepositoryTest {
 
     @Autowired
-    private AccountRepository accountRepo;  
+    private AccountRepository accountRepo;
 
     @Autowired
     private AccountSecretRepository accountSecretRepo;
@@ -68,12 +68,12 @@ public class AccountRepositoryTest {
     @Test
     public void findAccountByEmail() {
         // not existing
-        Account foundAccount = accountRepo.findAccountByEmail("notexisting@staffjoy.net");
+        Account foundAccount = accountRepo.findAccountByEmail("notexisting@staffjoy.net").get();
         assertNull(foundAccount);
 
         accountRepo.save(newAccount);
         assertEquals(1, accountRepo.count());
-        foundAccount = accountRepo.findAccountByEmail(newAccount.getEmail());
+        foundAccount = accountRepo.findAccountByEmail(newAccount.getEmail()).get();
         assertNotNull(foundAccount);
         assertEquals(newAccount.getId(), foundAccount.getId());
     }
@@ -81,13 +81,13 @@ public class AccountRepositoryTest {
     @Test
     public void findAccountByPhoneNumber() {
         // not existing
-        Account foundAccount = accountRepo.findAccountByPhoneNumber("18001800180");
+        Account foundAccount = accountRepo.findAccountByPhoneNumber("18001800180").get();
         assertNull(foundAccount);
 
         // create new
         accountRepo.save(newAccount);
         assertEquals(1, accountRepo.count());
-        foundAccount = accountRepo.findAccountByPhoneNumber(newAccount.getPhoneNumber());
+        foundAccount = accountRepo.findAccountByPhoneNumber(newAccount.getPhoneNumber()).get();
         assertEquals(newAccount.getId(), foundAccount.getId());
     }
 
@@ -127,7 +127,6 @@ public class AccountRepositoryTest {
         Account toUpdateAccount = newAccount;
         toUpdateAccount.setName("update");
         toUpdateAccount.setEmail("update@staffjoy.xyz");
-        accountRepo.save(toUpdateAccount);
         Account updatedAccount = accountRepo.save(toUpdateAccount);
         Account foundAccount = accountRepo.findById(updatedAccount.getId()).get();
         assertEquals(updatedAccount, foundAccount);
@@ -152,7 +151,7 @@ public class AccountRepositoryTest {
         int result = accountRepo.updateEmailAndActivateById(toUpdateEmail, newAccount.getId());
         assertEquals(1, result);
 
-        Account updatedAccount = accountRepo.findAccountByEmail(toUpdateEmail);
+        Account updatedAccount = accountRepo.findAccountByEmail(toUpdateEmail).get();
         assertEquals(toUpdateEmail, updatedAccount.getEmail());
         assertTrue(updatedAccount.isConfirmedAndActive());
     }
@@ -167,14 +166,14 @@ public class AccountRepositoryTest {
         int result = accountSecretRepo.updatePasswordHashById(passwordHash, newAccount.getId());
         assertEquals(1, result);
 
-        AccountSecret foundAccountSecret = accountSecretRepo.findAccountSecretByEmail(newAccount.getEmail());
+        AccountSecret foundAccountSecret = accountSecretRepo.findAccountSecretByEmail(newAccount.getEmail()).get();
         assertNotNull(foundAccountSecret);
         assertEquals(newAccount.getId(), foundAccountSecret.getId());
         assertEquals(newAccount.isConfirmedAndActive(), foundAccountSecret.isConfirmedAndActive());
         assertEquals(passwordHash, foundAccountSecret.getPasswordHash() );
 
     }
-    
+
     @After
     public void destroy() {
         accountRepo.deleteAll();

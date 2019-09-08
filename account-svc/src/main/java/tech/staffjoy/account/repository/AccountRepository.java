@@ -1,5 +1,7 @@
 package tech.staffjoy.account.repository;
 
+import java.util.Optional;
+
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
@@ -12,11 +14,11 @@ import tech.staffjoy.account.model.Account;
 @Repository
 public interface AccountRepository extends JpaRepository<Account, String> {
 
-    Account findAccountById(String id);
+    Optional<Account> findAccountById(String id);
 
-    Account findAccountByEmail(String email);
+    Optional<Account> findAccountByEmail(String email);
 
-    Account findAccountByPhoneNumber(String phoneNumber);
+    Optional<Account> findAccountByPhoneNumber(String phoneNumber);
 
     @Modifying(clearAutomatically = true)
     @Query("update Account account set account.email = :email, account.confirmedAndActive = true where account.id = :id")
