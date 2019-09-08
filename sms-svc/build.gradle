@@ -1,0 +1,10 @@
+description = 'sms service'
+
+dependencies {
+    compile project(':common-lib')
+    compile project(':sms-api')
+    // aliyun sdk
+    implementation 'com.aliyun:aliyun-java-sdk-core:3.7.1'
+    implementation 'com.aliyun:aliyun-java-sdk-dysmsapi:1.1.0'
+    
+}
