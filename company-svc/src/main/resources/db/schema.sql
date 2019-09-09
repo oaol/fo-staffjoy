@@ -70,6 +70,10 @@ CREATE TABLE IF NOT EXISTS shift (
                                    published boolean NOT NULL DEFAULT false,
                                    start TIMESTAMP NOT NULL DEFAULT current_timestamp,
                                    stop TIMESTAMP NOT NULL DEFAULT current_timestamp,
+                                  /*
+                                   * mySql低版本不支持多列timestamp
+                                   * stop DATETIMA NOT NULL
+                                   */  
                                    PRIMARY KEY (id),
                                    KEY ix_job_shift_id (`job_id`),
                                    KEY ix_job_user_id (`user_id`)
