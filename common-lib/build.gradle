@@ -1,4 +1,4 @@
-description = 'common-lib'
+description = "common-lib"
 
 bootJar.enabled = false
 jar.enabled = true

@@ -1,10 +1,10 @@
-description = 'bot service'
+description = "bot service"
 
 dependencies {
-    compile project(':common-lib')
-    compile project(':bot-api')
-    compile project(':account-api')
-    compile project(':company-api')
-    compile project(':sms-api')
-    compile project(':mail-api')
+    compile project(":common-lib")
+    compile project(":bot-api")
+    compile project(":account-api")
+    compile project(":company-api")
+    compile project(":sms-api")
+    compile project(":mail-api")
 }

@@ -1,11 +1,11 @@
-rootProject.name = 'fo-staffjoy'
+rootProject.name = "fo-staffjoy"
 
-include 'common-lib'
-include 'account-svc', 'account-api'
-include 'company-svc', 'company-api'
-include 'mail-svc', 'mail-api'
-include 'faraday'
-include 'web'
-include  'sms-svc', 'sms-api'
-include  'bot-svc', 'bot-api'
+include "common-lib"
+include "account-svc", "account-api"
+include "company-svc", "company-api"
+include "mail-svc", "mail-api"
+include "faraday"
+include "web"
+include  "sms-svc", "sms-api"
+include  "bot-svc", "bot-api"
 

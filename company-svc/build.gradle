@@ -1,10 +1,10 @@
-description = 'template'
+description = "template"
 
 dependencies {
-    compile project(':common-lib')
-    compile project(':company-api')
-    compile project(':account-api')
-    compile project(':mail-api')
-    implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
-    implementation 'mysql:mysql-connector-java'
+    compile project(":common-lib")
+    compile project(":company-api")
+    compile project(":account-api")
+    compile project(":mail-api")
+    implementation "org.springframework.boot:spring-boot-starter-data-jpa"
+    implementation "mysql:mysql-connector-java"
 }

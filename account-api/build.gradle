@@ -1,8 +1,8 @@
-description = 'Account API/DTO for sharing between Client/Server'
+description = "Account API/DTO for sharing between Client/Server"
 
 bootJar.enabled = false
 jar.enabled = true
 
 dependencies {
-    compile project(':common-lib')
+    compile project(":common-lib")
 }

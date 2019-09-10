@@ -1,11 +1,11 @@
-description = 'spring mvc project'
+description = "spring mvc project"
 
 dependencies {
-    compile project(':common-lib')
-    compile project(':mail-api')
-    compile project(':account-api')
-    compile project(':company-api')
-    implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
-    implementation 'ch.mfrey.thymeleaf.extras.with:thymeleaf-with-dialect:3.0.1'
-    implementation 'nz.net.ultraq.thymeleaf:thymeleaf-layout-dialect:2.3.0'
+    compile project(":common-lib")
+    compile project(":mail-api")
+    compile project(":account-api")
+    compile project(":company-api")
+    implementation "org.springframework.boot:spring-boot-starter-thymeleaf"
+    implementation "ch.mfrey.thymeleaf.extras.with:thymeleaf-with-dialect:${thymeleafWithDialectVersion}"
+    implementation "nz.net.ultraq.thymeleaf:thymeleaf-layout-dialect:${thymeleafLayoutDialectVersion}"
 }

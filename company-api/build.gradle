@@ -1,8 +1,8 @@
-description = 'template'
+description = "template"
 
 bootJar.enabled = false
 jar.enabled = true
 
 dependencies {
-    compile project(':common-lib')
+    compile project(":common-lib")
 }
