@@ -6,3 +6,6 @@ include 'company-svc', 'company-api'
 include 'mail-svc', 'mail-api'
 include 'faraday'
 include 'web'
+include  'sms-svc', 'sms-api'
+include  'bot-svc', 'bot-api'
+

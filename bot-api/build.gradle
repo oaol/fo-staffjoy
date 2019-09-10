@@ -1,0 +1,9 @@
+description = 'bot api'
+
+bootJar.enabled = false
+jar.enabled = true
+
+dependencies {
+    compile project(':common-lib')
+    compile project(':company-api')
+}
