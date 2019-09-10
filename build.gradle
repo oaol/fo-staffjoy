@@ -19,7 +19,7 @@ allprojects  {
   version = "1.0.0"
 }
 
-apply from: "config.gradle"
+apply from: "version.gradle"
 
 subprojects {
     apply plugin: "java"
