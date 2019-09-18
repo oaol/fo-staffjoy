@@ -83,7 +83,7 @@ public interface AccountClient {
             @RequestBody @Valid PasswordResetRequest request);
 
     @PostMapping(path = "/request-email-change")
-    ResponseEntity<String> requetEmailChange(@RequestHeader(AuthConstant.AUTHORIZATION_HEADER) String authz,
+    ResponseEntity<String> requestEmailChange(@RequestHeader(AuthConstant.AUTHORIZATION_HEADER) String authz,
             @RequestBody @Valid EmailChangeRequest request);
 
     // ChangeEmail sets an account to active and updates its email. It is

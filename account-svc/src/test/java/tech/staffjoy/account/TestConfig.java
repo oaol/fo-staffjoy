@@ -8,6 +8,7 @@ import org.springframework.util.StringUtils;
 
 import feign.RequestInterceptor;
 import feign.RequestTemplate;
+import tech.staffjoy.common.auth.AuthConstant;
 
 /**
  * Pass CURRENT_USER_HEADER via Feign for testing
@@ -23,7 +24,7 @@ public class TestConfig {
             @Override
             public void apply(RequestTemplate template) {
                 if (!StringUtils.isEmpty(TEST_USER_ID)) {
-//                    template.header(AuthConstant.CURRENT_USER_HEADER, TEST_USER_ID);
+                    template.header(AuthConstant.CURRENT_USER_HEADER, TEST_USER_ID);
                 }
             }
         };
