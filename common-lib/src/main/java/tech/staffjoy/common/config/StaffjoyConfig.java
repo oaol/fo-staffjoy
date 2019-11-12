@@ -40,10 +40,10 @@ public class StaffjoyConfig implements WebMvcConfigurer {
         return EnvConfig.getEnvConfg(activeProfile);
     }
 
-    @Override
+   /* @Override
     public void addInterceptors(InterceptorRegistry registry) {
         registry.addInterceptor(new AuthorizeInterceptor());
-    }
+    }*/
 
     @Bean
     public RequestInterceptor feignRequestInterceptor() {
