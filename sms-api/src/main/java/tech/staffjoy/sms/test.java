@@ -1,26 +1,40 @@
 package tech.staffjoy.sms;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Properties;
+
+import org.junit.Test;
+
 
 public class test {
 
-    public static void main(String[] args) {
-        Map <String,Integer> map = new HashMap<String,Integer>();
+    public static void main(String[] args) throws FileNotFoundException {
+        //当前工程路径
+        String path = System.getProperty("user.dir");
+        System.out.println("path"+path);
+        //当前包的路径
+        String outpath = test.class.getPackage().getName();
+        System.out.println("outpath"+outpath);
+        System.out.println(path+File.separator+outpath);
 
-        Integer put = map.put("语文", 100);
         
-        System.out.println(put);
-        Integer put2 = map.put("数学", 90);
-        System.out.println(put2);
-        put=map.put("英文", 80);
-        System.out.println(put);
-        put2=map.put("数学", 60);
-        System.out.println(put2);
-        Integer integer = map.get("语文");
-        System.out.println(integer);
-        
-        
+      /*  
+        Properties properties = new Properties();
+        InputStream in = new FileInputStream(new File(System.getProperty("user.dir")+File.separator+"db"+File.separator+"application.yml"));
+        try {
+            properties.load(in);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }*/
+        //String activemqConnection = properties.getProperty("activemq.connection");
+        //System.out.println(activemqConnection);
+         
         
         
         
