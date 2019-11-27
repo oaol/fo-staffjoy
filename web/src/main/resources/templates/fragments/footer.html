@@ -1,7 +1,7 @@
 <div class="footer max-contained" xmlns:th="http://www.thymeleaf.org">
     <ul class="footer__block">
         <li class="footer__item footer__logo">
-            <img th:src="'/assets/images/staffjoy-logos/logo.svg?version='+${page.version}" alt="Staffjoy Logo" height="37" width="120">
+            <img th:src="${#httpServletRequest.getContextPath()} + '/assets/images/staffjoy-logos/logo.svg?version='+${page.version}" alt="Staffjoy Logo" height="37" width="120">
             <ul class="social">
                 <li class="social__item">
                     <a href="https://twitter.com/staffjoy"><i class="fa fa-twitter-square" aria-hidden="true"></i></a>

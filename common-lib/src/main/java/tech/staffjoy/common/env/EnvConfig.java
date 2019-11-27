@@ -22,6 +22,7 @@ public class EnvConfig {
     private String externalApex;
     private String internalApex;
     private String scheme;
+    private String contextPath;
 
     @Getter(AccessLevel.NONE)
     @Setter(AccessLevel.NONE)
@@ -33,6 +34,7 @@ public class EnvConfig {
                 .debug(true)
                 .externalApex("staffjoy-v2.local")
                 .internalApex(EnvConstant.ENV_DEV)
+                .contextPath("web")
                 .scheme("http")
                 .build();
         map.put(EnvConstant.ENV_DEV, envConfig);

@@ -12,8 +12,8 @@ public class MailConstant {
 
     public static final String FROM_NAME = "Staffjoy";
     /**
-     * aliyun 发信地址
+     * aliyun 发信地址s
      */
-    public static final String ACCOUNT_NAME = "fo@www.luosheng.tech";
-    public static final String ALIYUN_REGION_ID = "cn-hangzhou";
+    public static final String ACCOUNT_NAME = "silot@mail.silot.tech";
+    public static final String ALIYUN_REGION_ID = "ap-southeast-1";
 }

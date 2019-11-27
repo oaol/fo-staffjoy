@@ -32,6 +32,8 @@ public class MailSendService {
         mailRequest.setAccountName(MailConstant.ACCOUNT_NAME);
         mailRequest.setFromAlias(MailConstant.FROM_NAME);
         mailRequest.setAddressType(1);
+        // for 新加坡
+//        mailRequest.setVersion("2017-06-22");
         mailRequest.setToAddress(req.getTo());
         mailRequest.setReplyToAddress(false);
         mailRequest.setSubject(req.getSubject());

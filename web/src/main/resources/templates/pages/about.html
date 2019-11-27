@@ -9,7 +9,7 @@
 >
 <th:block layout:fragment="content">
     <div class="mission">
-        <img src="/assets/images/about/about.svg" alt="Logo about scheduling and all the things that are related to it" />
+        <img src="${#httpServletRequest.getContextPath()}/assets/images/about/about.svg" alt="Logo about scheduling and all the things that are related to it" />
         <h1>About Staffjoy</h1>
         <h3>A small startup changing how businesses schedule</h3>
     </div>
@@ -25,7 +25,7 @@
         <h2>Meet The Team</h2>
         <div class="mdl-grid">
             <div class="mdl-cell mdl-cell--4-col mdl-cell--4-col-desktop">
-                <img src="/assets/images/about/team/philip.jpg" alt="Philip I. Thomas"/>
+                <img src="${#httpServletRequest.getContextPath()}/assets/images/about/team/philip.jpg" alt="Philip I. Thomas"/>
                 <h3>Philip Thomas</h3>
                 <h4>Founder and CEO</h4>
                 <p>
@@ -33,7 +33,7 @@
                 </p>
             </div>
             <div class="mdl-cell mdl-cell--4-col mdl-cell--4-col-desktop">
-                <img src="/assets/images/about/team/tommy.jpg" alt="Tommy Koo" />
+                <img src="${#httpServletRequest.getContextPath()}/assets/images/about/team/tommy.jpg" alt="Tommy Koo" />
                 <h3>Tommy Koo</h3>
                 <h4>Product Designer</h4>
                 <p>
@@ -41,7 +41,7 @@
                 </p>
             </div>
             <div class="mdl-cell mdl-cell--4-col mdl-cell--4-col-desktop">
-                <img src="/assets/images/about/team/angelica.jpg" alt="Angelica Valentine" />
+                <img src="${#httpServletRequest.getContextPath()}/assets/images/about/team/angelica.jpg" alt="Angelica Valentine" />
                 <h3>Angelica Valentine</h3>
                 <h4>Marketing Manager</h4>
                 <p>

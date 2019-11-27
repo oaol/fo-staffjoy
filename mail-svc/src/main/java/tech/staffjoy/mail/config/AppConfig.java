@@ -10,6 +10,7 @@ import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
 
 import com.aliyuncs.DefaultAcsClient;
 import com.aliyuncs.IAcsClient;
+import com.aliyuncs.exceptions.ClientException;
 import com.aliyuncs.profile.DefaultProfile;
 import com.aliyuncs.profile.IClientProfile;
 
@@ -30,6 +31,12 @@ public class AppConfig {
     public IAcsClient acsClient() {
         IClientProfile profile = DefaultProfile.getProfile(MailConstant.ALIYUN_REGION_ID,
                 appProps.getAliyunAccessKey(), appProps.getAliyunAccessSecret());
+        // for 新加坡
+//        try {
+//        DefaultProfile.addEndpoint("dm.ap-southeast-1.aliyuncs.com", "ap-southeast-1", "Dm",  "dm.ap-southeast-1.aliyuncs.com");
+//        } catch (ClientException e) {
+//        e.printStackTrace();
+//        }
         IAcsClient client = new DefaultAcsClient(profile);
         return client;
     }

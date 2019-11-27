@@ -4,7 +4,7 @@ spring:
   profiles:
     active: dev
   application:
-    name: account-service
+    name: account
   datasource:
     url: ${ACCOUNT_DATASOURCE_URL}
     username: ${ACCOUNT_DATASOURCE_USERNAME}

@@ -1,0 +1,7 @@
+description = 'template'
+
+dependencies {
+    implementation project(':common-lib')
+    // spring cloud zuul 改了名字了， spring-cloud-starter-zuul -> spring-cloud-starter-netflix-zuul
+    implementation "org.springframework.cloud:spring-cloud-starter-netflix-zuul"
+}

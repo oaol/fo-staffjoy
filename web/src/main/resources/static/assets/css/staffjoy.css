@@ -7,8 +7,8 @@
  * -------------------------- */
 @font-face {
   font-family: 'FontAwesome';
-  src: url("/assets/fonts/fontawesome-webfont.eot?v=4.6.3");
-  src: url("/assets/fonts/fontawesome-webfont.eot?#iefix&v=4.6.3") format("embedded-opentype"), url("/assets/fonts/fontawesome-webfont.woff2?v=4.6.3") format("woff2"), url("/assets/fonts/fontawesome-webfont.woff?v=4.6.3") format("woff"), url("/assets/fonts/fontawesome-webfont.ttf?v=4.6.3") format("truetype"), url("/assets/fonts/fontawesome-webfont.svg?v=4.6.3#fontawesomeregular") format("svg");
+  src: url("${#httpServletRequest.getContextPath()}/assets/fonts/fontawesome-webfont.eot?v=4.6.3");
+  src: url("${#httpServletRequest.getContextPath()}/assets/fonts/fontawesome-webfont.eot?#iefix&v=4.6.3") format("embedded-opentype"), url("${#httpServletRequest.getContextPath()}/assets/fonts/fontawesome-webfont.woff2?v=4.6.3") format("woff2"), url("${#httpServletRequest.getContextPath()}/assets/fonts/fontawesome-webfont.woff?v=4.6.3") format("woff"), url("${#httpServletRequest.getContextPath()}/assets/fonts/fontawesome-webfont.ttf?v=4.6.3") format("truetype"), url("${#httpServletRequest.getContextPath()}/assets/fonts/fontawesome-webfont.svg?v=4.6.3#fontawesomeregular") format("svg");
   font-weight: normal;
   font-style: normal; }
 
@@ -3399,7 +3399,7 @@ h5 {
       margin-bottom: 30px; } }
   @media (min-width: 1200px) {
     #login {
-      background: #48b7ab url("/assets/images/staffjoy-logos/login-logos.svg") no-repeat top right; }
+      background: #48b7ab url("/web/assets/images/staffjoy-logos/login-logos.svg") no-repeat top right; }
       #login .login-panel {
         background: #fff;
         min-width: 400px;
@@ -3540,7 +3540,7 @@ h5 {
   color: #fff; }
   @media (min-width: 1200px) {
     #sign-up {
-      background: url("/assets/images/staffjoy-logos/right-icon-bg.svg"), url("/assets/images/staffjoy-logos/left-icon-bg.svg"), #48b7ab;
+      background: url("/web/assets/images/staffjoy-logos/right-icon-bg.svg"), url("/web/assets/images/staffjoy-logos/left-icon-bg.svg"), #48b7ab;
       background-repeat: no-repeat, no-repeat;
       background-position: top right, bottom left; } }
   #sign-up .back-button {
@@ -3596,7 +3596,7 @@ h5 {
   color: #fff; }
   @media (min-width: 1200px) {
     #sign-up {
-      background: url("/assets/images/staffjoy-logos/right-icon-bg.svg"), url("/assets/images/staffjoy-logos/left-icon-bg.svg"), #48b7ab;
+      background: url("/web/assets/images/staffjoy-logos/right-icon-bg.svg"), url("/web/assets/images/staffjoy-logos/left-icon-bg.svg"), #48b7ab;
       background-repeat: no-repeat, no-repeat;
       background-position: top right, bottom left; } }
   #sign-up .back-button {
@@ -3662,7 +3662,7 @@ h5 {
   color: #fff; }
   @media (min-width: 1200px) {
     #confirm {
-      background: url("/assets/images/staffjoy-logos/right-icon-bg.svg"), url("/assets/images/staffjoy-logos/left-icon-bg.svg"), #48b7ab;
+      background: url("/web/assets/images/staffjoy-logos/right-icon-bg.svg"), url("/web/assets/images/staffjoy-logos/left-icon-bg.svg"), #48b7ab;
       background-repeat: no-repeat, no-repeat;
       background-position: top right, bottom left; } }
   #confirm .back-button {
@@ -3701,7 +3701,7 @@ h5 {
   color: #fff; }
   @media (min-width: 1200px) {
     #newCompany {
-      background: url("/assets/images/staffjoy-logos/right-icon-bg.svg"), url("/assets/images/staffjoy-logos/left-icon-bg.svg"), #48b7ab;
+      background: url("/web/assets/images/staffjoy-logos/right-icon-bg.svg"), url("/web/assets/images/staffjoy-logos/left-icon-bg.svg"), #48b7ab;
       background-repeat: no-repeat, no-repeat;
       background-position: top right, bottom left; } }
   #newCompany .back-button {

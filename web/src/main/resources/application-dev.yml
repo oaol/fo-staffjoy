@@ -4,6 +4,8 @@ spring:
 
 server:
   port: 8086
+  servlet:
+    context-path: /web
 
 staffjoy:
   email-service-endpoint: http://localhost:8088

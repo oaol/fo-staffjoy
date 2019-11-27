@@ -97,7 +97,7 @@ public class AccountService {
     public AccountDto create(String name, String email, String phoneNumber) {
         if (StringUtils.hasText(email)) {
             // Check to see if account exists
-            Account foundAccount = accountRepository.findAccountByEmail(email).get();
+            Account foundAccount = accountRepository.findAccountByEmail(email).orElse(null);
             if (foundAccount != null) {
                 throw new ServiceException("A user with that email already exists. Try a password reset");
             }
@@ -405,7 +405,8 @@ public class AccountService {
         String path = String.format(pathFormat, token);
         URI link = null;
         try {
-            link = new URI("http", "www." + envConfig.getExternalApex(), path, null);
+            link = new URI("http", "www." + envConfig.getExternalApex(),
+                    path, null);
         } catch (URISyntaxException ex) {
             String errMsg = "Could not create activation url";
             if (!activateOrConfirm) {

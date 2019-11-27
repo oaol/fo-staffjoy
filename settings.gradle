@@ -8,4 +8,4 @@ include "faraday"
 include "web"
 include  "sms-svc", "sms-api"
 include  "bot-svc", "bot-api"
-
+include  "gateway-zuul"

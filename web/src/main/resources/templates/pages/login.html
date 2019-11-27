@@ -10,7 +10,7 @@
         <div class="back-button">
             <a class="button button--outline white-bg" href="/"><i class="fa fa-arrow-left" aria-hidden="true"></i>Go Back</a>
         </div>
-        <img th:src="|/assets/images/staffjoy-logos/logo.svg?version=${page.version}|" alt="Staffjoy Logo">
+        <img th:src="|${#httpServletRequest.getContextPath()}/assets/images/staffjoy-logos/logo.svg?version=${page.version}|" alt="Staffjoy Logo">
         <h1>Create an online schedule that you can share with your team</h1>
         <form th:action="@{/login}" class="login-form" th:method="post">
             <div class="warning-message" th:if="${page.denied}">
