@@ -1,4 +1,4 @@
-package tech.staffjoy.sms;
+package tech.staffjoy.sms.test;
 
 import java.util.ArrayList;
 import java.util.List;
